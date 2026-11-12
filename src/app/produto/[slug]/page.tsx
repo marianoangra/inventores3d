@@ -5,6 +5,7 @@ import { PRODUCTS, CATEGORIES, getProduct } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import AddToCart from "./AddToCart";
 import { STORE } from "@/lib/config";
+import { photosOf } from "@/lib/photos";
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
@@ -33,12 +34,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     "@type": "Product",
     name: p.name,
     description: p.description,
+    sku: p.slug,
+    url: `${STORE.url}/produto/${p.slug}`,
+    image: photosOf(p.slug).length ? photosOf(p.slug).map((src) => `${STORE.url}${src}`) : [`${STORE.url}/produto/${p.slug}/opengraph-image`],
+    category: cat.label,
     brand: { "@type": "Brand", name: STORE.name },
     offers: {
       "@type": "Offer",
       priceCurrency: "BRL",
       price: p.price.toFixed(2),
-      availability: "https://schema.org/PreOrder",
+      availability: "https://schema.org/MadeToOrder",
+      itemCondition: "https://schema.org/NewCondition",
+      seller: { "@type": "Organization", name: STORE.name },
       url: `${STORE.url}/produto/${p.slug}`,
     },
   };

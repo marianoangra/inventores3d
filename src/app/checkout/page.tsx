@@ -307,7 +307,7 @@ function Field({
         aria-invalid={!!err}
         className={`mt-1.5 w-full rounded-2xl bg-white border-2 px-4 h-13 min-h-[52px] outline-none transition ${err ? "border-coral" : "border-line focus:border-ink"}`}
       />
-      {err ? <span className="block text-xs text-coral mt-1">{err}</span> : hint ? <span className="block text-xs text-mint mt-1">{hint}</span> : null}
+      {err ? <span className="block text-xs text-coral mt-1">{err}</span> : hint ? <span className="block text-xs text-mint-ink mt-1">{hint}</span> : null}
     </label>
   );
 }
@@ -316,7 +316,7 @@ function Row({ k, v, green }: { k: string; v: string; green?: boolean }) {
   return (
     <div className="flex justify-between gap-4">
       <span className="text-muted">{k}</span>
-      <span className={green ? "text-mint font-semibold" : "font-medium"}>{v}</span>
+      <span className={green ? "text-mint-ink font-semibold" : "font-medium"}>{v}</span>
     </div>
   );
 }

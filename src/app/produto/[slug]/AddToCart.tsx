@@ -104,7 +104,7 @@ export default function AddToCart({ product: p }: { product: Product }) {
               {p.compareAt && <span className="text-muted line-through">{brl(p.compareAt + (col.extra ?? 0))}</span>}
             </div>
             <p className="mt-1.5 text-sm">
-              <b className="text-mint">{brl(unit * (1 - STORE.pixDiscount))} no Pix</b> <span className="text-muted">· ou no cartão</span>
+              <b className="text-mint-ink">{brl(unit * (1 - STORE.pixDiscount))} no Pix</b> <span className="text-muted">· ou no cartão</span>
             </p>
           </div>
 

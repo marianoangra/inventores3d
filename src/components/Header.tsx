@@ -17,8 +17,8 @@ const NAV = [
 
 export function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2 shrink-0" aria-label="Inventores 3D — início">
-      <span className="relative grid place-items-center w-9 h-9 rounded-[11px] bg-ink text-lime font-display font-extrabold text-[15px] tracking-tight">
+    <Link href="/" className="flex items-center gap-2 shrink-0" title="Inventores 3D — início">
+      <span aria-hidden className="relative grid place-items-center w-9 h-9 rounded-[11px] bg-ink text-lime font-display font-extrabold text-[15px] tracking-tight">
         i3
         <span className="absolute -right-1 -top-1 w-3 h-3 rounded-full bg-coral ring-2 ring-paper" />
       </span>
@@ -121,7 +121,7 @@ export default function Header() {
             </button>
           </div>
         </div>
-        <nav className="lg:hidden flex gap-1 overflow-x-auto no-scrollbar px-3 pb-2.5" aria-label="Categorias">
+        <nav className="lg:hidden flex gap-1 overflow-x-auto no-scrollbar px-3 pb-2.5 pr-10 [mask-image:linear-gradient(to_right,black_82%,transparent)]" aria-label="Categorias">
           <Suspense>
             <NavLinks />
           </Suspense>

@@ -4,9 +4,10 @@ import { colorOf } from "@/lib/products";
 // Ilustrações vetoriais com sombreamento de "plástico" + linhas de camada (cara de impressão 3D).
 // Pra usar foto real: coloque /public/produtos/<slug>.webp e troque o <ProductArt> por <Image>.
 
-type Props = { art: Art; color: string; className?: string; id: string; shadow?: boolean };
+// noText: omite <text> (o gerador de imagem de prévia não renderiza texto em SVG)
+type Props = { art: Art; color: string; className?: string; id: string; shadow?: boolean; noText?: boolean; size?: number };
 
-export default function ProductArt({ art, color, className, id, shadow = true }: Props) {
+export default function ProductArt({ art, color, className, id, shadow = true, noText = false, size }: Props) {
   const c = colorOf(color);
   const k = `${id}-${color}`.replace(/[^a-zA-Z0-9-]/g, "");
   const F = `url(#p-${k})`; // corpo (plástico)
@@ -258,9 +259,9 @@ export default function ProductArt({ art, color, className, id, shadow = true }:
           <circle cx={40} cy={100} r={11} fill="none" stroke="#b8b4c4" strokeWidth={4.5} />
           <rect x={50} y={76} width={124} height={48} rx={16} fill={W} stroke={S} />
           <rect x={50} y={76} width={124} height={48} rx={16} fill={L} />
-          <text x={112} y={110} textAnchor="middle" fontSize={28} fontWeight={800} fill={c.a} fontFamily="system-ui" letterSpacing={1}>
+          {!noText && (<text x={112} y={110} textAnchor="middle" fontSize={28} fontWeight={800} fill={c.a} fontFamily="system-ui" letterSpacing={1}>
             LUNA
-          </text>
+          </text>)}
         </g>
       );
       break;
@@ -285,7 +286,7 @@ export default function ProductArt({ art, color, className, id, shadow = true }:
           <rect x={44} y={72} width={112} height={22} rx={8} fill={W} stroke={S} />
           <rect x={93} y={72} width={14} height={88} fill="#fff" opacity={0.92} />
           <path d="M100 72 C84 46 62 58 86 72 M100 72 C116 46 138 58 114 72" stroke="#fff" strokeWidth={7} fill="none" strokeLinecap="round" />
-          <text x={100} y={138} textAnchor="middle" fontSize={30} fontWeight={900} fill="#fff" fontFamily="system-ui">?</text>
+          {!noText && (<text x={100} y={138} textAnchor="middle" fontSize={30} fontWeight={900} fill="#fff" fontFamily="system-ui">?</text>)}
         </g>
       );
       break;
@@ -319,7 +320,7 @@ export default function ProductArt({ art, color, className, id, shadow = true }:
   }
 
   return (
-    <svg viewBox="0 0 200 200" className={className} role="img" aria-label="Ilustração do produto">
+    <svg viewBox="0 0 200 200" width={size} height={size} className={className} role="img" aria-label="Ilustração do produto">
       <defs>
         <radialGradient id={`p-${k}`} cx="0.35" cy="0.3" r="0.85">
           <stop offset="0" stopColor="#fff" stopOpacity={0.9} />

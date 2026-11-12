@@ -27,6 +27,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="pt-BR">
       <body className={`${bricolage.variable} ${inter.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Store",
+              name: STORE.name,
+              url: STORE.url,
+              description: STORE.tagline,
+              image: `${STORE.url}/opengraph-image`,
+              telephone: `+${STORE.whatsapp}`,
+              priceRange: "R$",
+              currenciesAccepted: "BRL",
+              paymentAccepted: "Pix, cartão de crédito",
+              sameAs: [`https://instagram.com/${STORE.instagram}`],
+            }),
+          }}
+        />
         <CartProvider>
           <Header />
           <main>{children}</main>

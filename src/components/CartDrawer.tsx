@@ -47,7 +47,7 @@ export default function CartDrawer() {
   }, [open, setOpen]);
 
   return (
-    <div className={`fixed inset-0 z-[70] ${open ? "" : "pointer-events-none"}`} aria-hidden={!open}>
+    <div className={`fixed inset-0 z-[70] ${open ? "" : "pointer-events-none"}`} inert={!open}>
       <div onClick={() => setOpen(false)} className={`absolute inset-0 bg-ink/40 backdrop-blur-[2px] transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`} />
       <aside
         role="dialog"
@@ -72,7 +72,7 @@ export default function CartDrawer() {
                   Faltam <b>{brl(falta)}</b> pro <b>frete grátis</b>
                 </span>
               ) : (
-                <b className="text-mint">Frete grátis garantido!</b>
+                <b className="text-mint-ink">Frete grátis garantido!</b>
               )}
             </p>
             <div className="h-1.5 mt-2.5 rounded-full bg-line overflow-hidden">
@@ -166,7 +166,7 @@ export default function CartDrawer() {
               <span className="text-muted">Subtotal</span>
               <span className="font-bold text-xl tabular-nums">{brl(subtotal)}</span>
             </div>
-            <p className="text-sm text-mint font-semibold text-right -mt-2">ou {brl(subtotal * (1 - STORE.pixDiscount))} no Pix</p>
+            <p className="text-sm text-mint-ink font-semibold text-right -mt-2">ou {brl(subtotal * (1 - STORE.pixDiscount))} no Pix</p>
             <Link
               href="/checkout"
               onClick={() => setOpen(false)}

@@ -31,21 +31,21 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-10">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-line text-xs font-semibold px-3 py-1.5">
+            <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-white border border-line text-xs font-semibold px-3 py-1.5">
               <span className="w-2 h-2 rounded-full bg-mint animate-pulse" /> Impresso sob encomenda · feito no Brasil
             </span>
-            <h1 className="font-display text-[2.6rem] leading-[1] sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] mt-5">
+            <h1 className="font-display text-[2.6rem] leading-[1] sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] sm:mt-5">
               Brinquedos que <span className="relative inline-block text-brand">mexem<svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" aria-hidden><path d="M2 8 Q50 0 100 7 T198 5" stroke="#d4f55a" strokeWidth="6" fill="none" strokeLinecap="round" /></svg></span> cada junta.
             </h1>
-            <p className="text-lg text-muted mt-6 max-w-lg leading-relaxed">
-              Dragões, dinos, axolotes e fidgets articulados, impressos em 3D na cor que você escolher. Sem montagem, sem cola — direto da impressora pra sua mão.
+            <p className="text-base sm:text-lg text-muted mt-4 sm:mt-6 max-w-lg leading-relaxed">
+              Dragões, dinos, axolotes e fidgets articulados, impressos em 3D na cor que você escolher.<span className="hidden sm:inline"> Sem montagem, sem cola — direto da impressora pra sua mão.</span>
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 mt-8">
-              <Link href="/produtos" className="inline-flex items-center justify-center gap-2 rounded-full bg-ink hover:bg-brand text-white font-semibold px-7 h-14 transition">
+            <div className="grid grid-cols-2 sm:flex gap-2.5 sm:gap-3 mt-5 sm:mt-8">
+              <Link href="/produtos" className="inline-flex items-center justify-center gap-2 rounded-full bg-ink hover:bg-brand text-white font-semibold px-4 sm:px-7 h-12 sm:h-14 text-[15px] sm:text-base transition">
                 Ver a coleção <IconArrow size={18} />
               </Link>
-              <Link href="/produtos?c=kits" className="inline-flex items-center justify-center gap-2 rounded-full bg-white border border-line hover:border-ink/40 font-semibold px-7 h-14 transition">
-                <IconGift size={18} /> Lembrancinhas de festa
+              <Link href="/produtos?c=kits" className="inline-flex items-center justify-center gap-2 rounded-full bg-white border border-line hover:border-ink/40 font-semibold px-4 sm:px-7 h-12 sm:h-14 text-[15px] sm:text-base transition">
+                <IconGift size={18} /> <span className="sm:hidden">Festas</span><span className="hidden sm:inline">Lembrancinhas de festa</span>
               </Link>
             </div>
             <dl className="hidden sm:grid grid-cols-3 gap-3 mt-10 max-w-md">

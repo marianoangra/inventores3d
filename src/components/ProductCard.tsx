@@ -63,7 +63,7 @@ export default function ProductCard({ p, i = 0 }: { p: Product; i?: number }) {
           <div>
             {p.compareAt && <p className="text-xs text-muted line-through">{brl(p.compareAt)}</p>}
             <p className="font-bold text-[17px] leading-none">{brl(p.price)}</p>
-            <p className="text-[11.5px] text-mint font-semibold mt-1">{brl(p.price * (1 - STORE.pixDiscount))} no Pix</p>
+            <p className="text-[11.5px] text-mint-ink font-semibold mt-1">{brl(p.price * (1 - STORE.pixDiscount))} no Pix</p>
           </div>
           {quick ? (
             <button

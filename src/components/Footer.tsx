@@ -55,7 +55,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <p className="mx-auto max-w-7xl px-4 sm:px-6 py-6 text-xs text-white/40">
+        <p className="mx-auto max-w-7xl px-4 sm:px-6 py-6 text-xs text-white/60">
           © {new Date().getFullYear()} {STORE.name} · Modelos originais ou com licença comercial · Pagamento via Pix ou cartão
         </p>
       </div>
