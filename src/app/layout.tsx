@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { Fredoka, Nunito } from "next/font/google";
+import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/components/CartProvider";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import CartDrawer from "@/components/CartDrawer";
+import Footer, { WhatsFloat } from "@/components/Footer";
+import CartDrawer, { CartToast } from "@/components/CartDrawer";
 import { STORE } from "@/lib/config";
+import type { Viewport } from "next";
 
-const fredoka = Fredoka({ variable: "--font-fredoka", subsets: ["latin"], weight: ["500", "600", "700"] });
-const nunito = Nunito({ variable: "--font-nunito", subsets: ["latin"] });
+export const viewport: Viewport = { themeColor: "#fbfaf7" };
+
+const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"] });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(STORE.url),
@@ -23,12 +26,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${fredoka.variable} ${nunito.variable} antialiased`}>
+      <body className={`${bricolage.variable} ${inter.variable} antialiased`}>
         <CartProvider>
           <Header />
           <main>{children}</main>
           <Footer />
           <CartDrawer />
+          <CartToast />
+          <WhatsFloat />
         </CartProvider>
       </body>
     </html>

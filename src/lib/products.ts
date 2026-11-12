@@ -229,6 +229,7 @@ export const PRODUCTS: Product[] = [
     colors: ["galaxy", "arcoiris", "lava", "oceano", "neon", "rosa"],
     personalize: "Qual bicho? (dragão, dino, axolote, capivara, polvo)",
     age: "+6 anos",
+    bestseller: true,
   },
   {
     slug: "kit-3-chaveiros",
@@ -283,6 +284,7 @@ export const PRODUCTS: Product[] = [
     colors: ["arcoiris"],
     badge: "-18%",
     age: "+6 anos",
+    bestseller: true,
   },
   {
     slug: "kit-lembrancinha-10",

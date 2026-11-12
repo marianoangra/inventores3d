@@ -7,7 +7,8 @@ export type CartItem = { key: string; slug: string; color: string; note: string;
 
 type Ctx = {
   items: CartItem[];
-  add: (slug: string, color: string, note: string, qty?: number) => void;
+  add: (slug: string, color: string, note: string, qty?: number, openDrawer?: boolean) => void;
+  toast: { slug: string; color: string; n: number } | null;
   setQty: (key: string, qty: number) => void;
   remove: (key: string) => void;
   clear: () => void;
@@ -30,6 +31,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [toast, setToast] = useState<Ctx["toast"]>(null);
+
+  useEffect(() => {
+    if (!toast) return;
+    const t = setTimeout(() => setToast(null), 2600);
+    return () => clearTimeout(t);
+  }, [toast]);
 
   useEffect(() => {
     try {
@@ -47,14 +55,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [items, loaded]);
 
   const value = useMemo<Ctx>(() => {
-    const add: Ctx["add"] = (slug, color, note, qty = 1) => {
+    const add: Ctx["add"] = (slug, color, note, qty = 1, openDrawer = true) => {
       const key = `${slug}|${color}|${note.trim()}`;
       setItems((cur) => {
         const found = cur.find((i) => i.key === key);
         if (found) return cur.map((i) => (i.key === key ? { ...i, qty: i.qty + qty } : i));
         return [...cur, { key, slug, color, note: note.trim(), qty }];
       });
-      setOpen(true);
+      if (openDrawer) setOpen(true);
+      else setToast({ slug, color, n: Date.now() });
     };
     return {
       items,
@@ -67,8 +76,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       subtotal: items.reduce((s, i) => s + unitPrice(i.slug, i.color) * i.qty, 0),
       open,
       setOpen,
+      toast,
     };
-  }, [items, open]);
+  }, [items, open, toast]);
 
   return <CartCtx.Provider value={value}>{children}</CartCtx.Provider>;
 }

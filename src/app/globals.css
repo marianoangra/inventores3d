@@ -1,28 +1,67 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #1a1033;
-  --color-brand: #7c3aed;
-  --color-brand-dark: #5b21b6;
-  --color-pop: #f43f5e;
-  --color-sun: #fbbf24;
-  --color-cream: #faf7ff;
-  --font-display: var(--font-fredoka), system-ui, sans-serif;
-  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  --color-ink: #15121f;
+  --color-muted: #6b6878;
+  --color-line: #ebe8f0;
+  --color-paper: #fbfaf7;
+  --color-brand: #6d4aff;
+  --color-brand-dark: #5332e0;
+  --color-brand-soft: #efeaff;
+  --color-lime: #d4f55a;
+  --color-coral: #ff6b5b;
+  --color-sun: #ffc93c;
+  --color-mint: #2fbf71;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --radius-card: 1.5rem;
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  background: #ffffff;
+  background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
 }
 
-@keyframes wiggle {
-  0%, 100% { transform: rotate(-4deg) translateY(0); }
-  50% { transform: rotate(4deg) translateY(-8px); }
+::selection {
+  background: var(--color-lime);
 }
-.wiggle { animation: wiggle 4s ease-in-out infinite; }
+
+:focus-visible {
+  outline: 2.5px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+.float { animation: float 5s ease-in-out infinite; }
+
+@keyframes pop-in {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.pop-in { animation: pop-in 0.35s ease-out; }
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 28s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .float, .marquee, .pop-in { animation: none; }
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+details > summary::-webkit-details-marker { display: none; }
