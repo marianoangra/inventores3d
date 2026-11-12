@@ -6,6 +6,8 @@ import type { Product } from "@/lib/products";
 import { colorOf } from "@/lib/products";
 import { STORE, brl } from "@/lib/config";
 import ProductArt from "./ProductArt";
+import Image from "next/image";
+import { photosOf } from "@/lib/photos";
 import { useCart } from "./CartProvider";
 import { IconCheck, IconPlus } from "./Icons";
 
@@ -25,7 +27,11 @@ export default function ProductCard({ p, i = 0 }: { p: Product; i?: number }) {
           {p.badge && <span className="rounded-full bg-ink text-white text-[11px] font-semibold px-2.5 py-1">{p.badge}</span>}
           {off > 0 && !p.badge?.includes("%") && <span className="rounded-full bg-coral text-white text-[11px] font-semibold px-2.5 py-1">-{off}%</span>}
         </div>
-        <ProductArt art={p.art} color={color} id={`card-${p.slug}`} className="absolute inset-0 m-auto w-[82%] h-[82%] group-hover:scale-[1.06] group-hover:-rotate-2 transition duration-500" />
+        {photosOf(p.slug)[0] ? (
+          <Image src={photosOf(p.slug)[0]} alt={p.name} fill sizes="(max-width: 640px) 50vw, 25vw" className="object-cover group-hover:scale-[1.04] transition duration-500" />
+        ) : (
+          <ProductArt art={p.art} color={color} id={`card-${p.slug}`} className="absolute inset-0 m-auto w-[82%] h-[82%] group-hover:scale-[1.06] group-hover:-rotate-2 transition duration-500" />
+        )}
       </Link>
 
       <div className="flex flex-col flex-1 p-3.5 sm:p-4">

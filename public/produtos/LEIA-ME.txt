@@ -1,0 +1,2 @@
+Coloque aqui as fotos dos produtos (.webp ou .jpg, quadradas, 1200x1200).
+Depois registre o caminho em src/lib/photos.ts.

@@ -5,6 +5,8 @@ import type { Product } from "@/lib/products";
 import { colorOf } from "@/lib/products";
 import { useCart } from "@/components/CartProvider";
 import ProductArt from "@/components/ProductArt";
+import Image from "next/image";
+import { photosOf } from "@/lib/photos";
 import { STORE, brl } from "@/lib/config";
 import { readyDate } from "@/lib/delivery";
 import { IconCheck, IconChevron, IconLeaf, IconMinus, IconPlus, IconPrinter, IconShield, IconTruck, IconWhats } from "@/components/Icons";
@@ -22,6 +24,8 @@ export default function AddToCart({ product: p }: { product: Product }) {
   const unit = p.price + (col.extra ?? 0);
   const needsNote = !!p.personalize;
   const missing = needsNote && !note.trim();
+  const photos = photosOf(p.slug);
+  const [shot, setShot] = useState(0);
   const off = p.compareAt ? Math.round((1 - p.price / p.compareAt) * 100) : 0;
 
   useEffect(() => setReady(readyDate(STORE.productionDays)), []);
@@ -55,12 +59,25 @@ export default function AddToCart({ product: p }: { product: Product }) {
               {p.badge && <span className="rounded-full bg-ink text-white text-xs font-semibold px-3 py-1.5">{p.badge}</span>}
               {off > 0 && !p.badge?.includes("%") && <span className="rounded-full bg-coral text-white text-xs font-semibold px-3 py-1.5">-{off}%</span>}
             </div>
-            <ProductArt key={color} art={p.art} color={color} id={`pdp-${p.slug}`} className="pop-in absolute inset-0 m-auto w-[86%] h-[86%]" />
-            <span className="absolute bottom-4 left-4 rounded-full bg-white/80 backdrop-blur text-xs font-medium px-3 py-1.5 border border-line">
+            {photos.length ? (
+              <Image src={photos[shot]} alt={p.name} fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
+            ) : (
+              <ProductArt key={color} art={p.art} color={color} id={`pdp-${p.slug}`} className="pop-in absolute inset-0 m-auto w-[86%] h-[86%]" />
+            )}
+            {!photos.length && <span className="absolute bottom-4 left-4 rounded-full bg-white/80 backdrop-blur text-xs font-medium px-3 py-1.5 border border-line">
               Ilustração · a peça real tem as linhas de camada da impressão
-            </span>
+            </span>}
           </div>
-          {p.colors.length > 1 && (
+          {photos.length > 1 && (
+            <div className="flex gap-2.5 mt-3 overflow-x-auto no-scrollbar">
+              {photos.map((src, i) => (
+                <button key={src} onClick={() => setShot(i)} aria-label={`Foto ${i + 1}`} className={`relative shrink-0 w-[72px] h-[72px] rounded-2xl overflow-hidden border-2 transition ${shot === i ? "border-ink" : "border-line"}`}>
+                  <Image src={src} alt="" fill sizes="72px" className="object-cover" />
+                </button>
+              ))}
+            </div>
+          )}
+          {!photos.length && p.colors.length > 1 && (
             <div className="flex gap-2.5 mt-3 overflow-x-auto no-scrollbar">
               {p.colors.map((id) => (
                 <button
