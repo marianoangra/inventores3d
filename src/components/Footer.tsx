@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="bg-ink text-white/80 mt-24">
       <div className="mx-auto max-w-6xl px-4 py-12 grid gap-8 sm:grid-cols-3">
         <div>
-          <p className="font-display text-xl font-bold text-white">Investores<span className="text-pop">3D</span></p>
+          <p className="font-display text-xl font-bold text-white">Inventores<span className="text-pop">3D</span></p>
           <p className="text-sm mt-2">{STORE.tagline}.</p>
         </div>
         <div className="text-sm space-y-2">

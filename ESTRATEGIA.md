@@ -1,4 +1,4 @@
-# Investores 3D — estratégia de lançamento
+# Inventores 3D — estratégia de lançamento
 
 ## O que o mercado mostrou (nov/2026)
 - **Articulados print-in-place dominam** brinquedo 3D: dragão, dino, cobra, axolote, polvo, capivara. Dino articulado R$25–45, cobra R$18–35 (ML/Shopee).

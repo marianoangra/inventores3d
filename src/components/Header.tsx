@@ -15,7 +15,7 @@ export default function Header() {
         <div className="mx-auto max-w-6xl px-4 h-16 flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold">
             <span className="grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-brand to-pop text-white text-lg">3D</span>
-            <span>Investores<span className="text-brand">3D</span></span>
+            <span>Inventores<span className="text-brand">3D</span></span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-semibold text-ink/70">
             <Link href="/produtos?c=articulados" className="hover:text-brand">Articulados</Link>

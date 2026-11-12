@@ -12,7 +12,7 @@ const nunito = Nunito({ variable: "--font-nunito", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(STORE.url),
-  title: { default: "Investores 3D — Brinquedos articulados impressos em 3D", template: "%s | Investores 3D" },
+  title: { default: "Inventores 3D — Brinquedos articulados impressos em 3D", template: "%s | Inventores 3D" },
   description:
     "Dragão articulado, dino, axolote, fidgets, chaveiros e lembrancinhas de festa impressos em 3D sob encomenda. Frete grátis acima de R$199 e 5% off no Pix.",
   keywords: ["dragão articulado", "brinquedo impressão 3d", "chaveiro articulado", "fidget 3d", "lembrancinha festa infantil", "axolote articulado"],
