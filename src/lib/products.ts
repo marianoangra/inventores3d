@@ -64,14 +64,14 @@ export type Product = {
 export const PRODUCTS: Product[] = [
   {
     slug: "rok-cooler",
-    name: "Rok-Cooler — Cooler Foguete",
+    name: "Rok-Cooler Mini — Cooler Foguete",
     category: "invencoes",
     art: "box",
-    price: 349.9,
-    short: "Um foguete que guarda suas latas no gelo. Janela, dreno e porta-latas laterais.",
+    price: 649.9,
+    short: "Um foguete de 37 cm que guarda 3 latas no gelo e mais 2 nas laterais.",
     description:
-      "Invenção da casa: um cooler em forma de foguete, com câmara de gelo, janela transparente pra ver o que tem dentro e dreno na base pra tirar a água do gelo derretido. Nas laterais, dois suportes seguram as latas que estão em uso. Alça no topo pra carregar pra churrasco, piscina ou escritório.",
-    specs: ["Câmara de gelo com janela transparente", "Dreno com registro na base", "2 porta-latas laterais", "Alça de transporte no topo", "Feito sob encomenda — prazo combinado no WhatsApp"],
+      "Invenção da casa: um cooler em forma de foguete, com câmara de gelo, janela dupla transparente pra ver o que tem dentro e dreno rosqueado na frente pra tirar a água do gelo derretido. As paredes grossas, de 16 mm, isolam o gelo. A tampa-ogiva trava com um giro e tem alça pra carregar pra churrasco, piscina ou escritório. A 1ª foto é a arte do conceito; a 2ª é o projeto 3D do Mini.",
+    specs: ["37 cm de altura", "3 latas no gelo + 2 nos porta-latas laterais", "Janela dupla com camada de ar", "Tampa com trava de giro e alça", "Dreno rosqueado com anel de vedação", "Feito sob encomenda — prazo combinado no WhatsApp"],
     colors: ["espacial"],
     badge: "Invenção nossa",
   },
