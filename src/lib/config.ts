@@ -3,7 +3,7 @@ export const STORE = {
   name: "Inventores 3D",
   domain: "inventores3d.com.br",
   url: "https://inventores3d.com.br",
-  tagline: "Brinquedos articulados impressos em 3D, feitos sob encomenda no Brasil",
+  tagline: "Invenções próprias impressas em 3D — de coolers e jogos a brinquedos articulados, feitas sob encomenda no Brasil",
   // Número do WhatsApp que recebe os pedidos (só dígitos, com DDI 55).
   // Defina NEXT_PUBLIC_WHATSAPP na Vercel; o valor abaixo é só fallback.
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "5500000000000",

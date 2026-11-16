@@ -15,10 +15,10 @@ const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(STORE.url),
-  title: { default: "Inventores 3D — Brinquedos articulados impressos em 3D", template: "%s | Inventores 3D" },
+  title: { default: "Inventores 3D — Invenções próprias impressas em 3D", template: "%s | Inventores 3D" },
   description:
-    "Dragão articulado, dino, axolote, fidgets, chaveiros e lembrancinhas de festa impressos em 3D sob encomenda. Frete grátis acima de R$199 e 5% off no Pix.",
-  keywords: ["dragão articulado", "brinquedo impressão 3d", "chaveiro articulado", "fidget 3d", "lembrancinha festa infantil", "axolote articulado"],
+    "Loja de invenções próprias impressas em 3D: Rok-Cooler foguete, Snap-Pong, colecionáveis, brinquedos articulados e personalizados, feitos sob encomenda. Frete grátis acima de R$199 e 5% off no Pix.",
+  keywords: ["invenções impressão 3d", "cooler foguete", "jogo de pong de lata", "boneco colecionável 3d", "dragão articulado", "brinquedo impressão 3d", "chaveiro articulado", "fidget 3d", "lembrancinha festa infantil", "axolote articulado"],
   openGraph: { type: "website", locale: "pt_BR", siteName: STORE.name, url: STORE.url },
   alternates: { canonical: "/" },
 };

@@ -16,9 +16,10 @@ export type Art =
   | "lamp"
   | "party";
 
-export type Category = "articulados" | "fidget" | "chaveiros" | "kits" | "personalizados";
+export type Category = "invencoes" | "articulados" | "fidget" | "chaveiros" | "kits" | "personalizados";
 
 export const CATEGORIES: { id: Category; label: string; desc: string }[] = [
+  { id: "invencoes", label: "Invenções", desc: "Criações nossas que você não acha em loja" },
   { id: "articulados", label: "Articulados", desc: "Bichos que mexem cada junta" },
   { id: "fidget", label: "Fidget & Antiestresse", desc: "Pra mão que não para quieta" },
   { id: "chaveiros", label: "Chaveiros", desc: "Mini articulados pra levar junto" },
@@ -38,6 +39,9 @@ export const COLORS: Record<string, Color> = {
   neon: { id: "neon", label: "Brilha no escuro", a: "#84cc16", b: "#d9f99d", extra: 10 },
   rosa: { id: "rosa", label: "Algodão-doce", a: "#f472b6", b: "#c4b5fd" },
   ouro: { id: "ouro", label: "Ouro (seda)", a: "#b45309", b: "#fde68a", extra: 10 },
+  candy: { id: "candy", label: "Candy (multicolor)", a: "#14b8a6", b: "#fb7185" },
+  espacial: { id: "espacial", label: "Preto e branco", a: "#111827", b: "#e5e7eb" },
+  palco: { id: "palco", label: "Pintado à mão", a: "#1f2937", b: "#f3e5ce" },
 };
 
 export type Product = {
@@ -58,6 +62,45 @@ export type Product = {
 };
 
 export const PRODUCTS: Product[] = [
+  {
+    slug: "rok-cooler",
+    name: "Rok-Cooler — Cooler Foguete",
+    category: "invencoes",
+    art: "box",
+    price: 349.9,
+    short: "Um foguete que guarda suas latas no gelo. Janela, dreno e porta-latas laterais.",
+    description:
+      "Invenção da casa: um cooler em forma de foguete, com câmara de gelo, janela transparente pra ver o que tem dentro e dreno na base pra tirar a água do gelo derretido. Nas laterais, dois suportes seguram as latas que estão em uso. Alça no topo pra carregar pra churrasco, piscina ou escritório.",
+    specs: ["Câmara de gelo com janela transparente", "Dreno com registro na base", "2 porta-latas laterais", "Alça de transporte no topo", "Feito sob encomenda — prazo combinado no WhatsApp"],
+    colors: ["espacial"],
+    badge: "Invenção nossa",
+  },
+  {
+    slug: "snap-pong",
+    name: "Snap-Pong — Pong de Lata",
+    category: "invencoes",
+    art: "party",
+    price: 89.9,
+    short: "Jogo de pong que trava entre duas latas. Abre, encaixa e joga.",
+    description:
+      "Invenção da casa: uma mesinha de pong hexagonal com 6 copinhos, que se prende entre duas latas com travas de encaixe. Abre, encaixa e o jogo está montado em segundos — na mesa do bar, no churrasco ou na sala. Acompanha bolinha.",
+    specs: ["6 copinhos em triângulo", "Travas que prendem em latas de 350 ml", "Abre e fecha por encaixe (snap)", "Bolinha inclusa"],
+    colors: ["candy"],
+    badge: "Invenção nossa",
+  },
+  {
+    slug: "boneco-rei-do-rock",
+    name: "Boneco Rei do Rock",
+    category: "invencoes",
+    art: "box",
+    price: 129.9,
+    short: "Colecionável de estante: o cantor de topete com microfone na mão, em pose de palco.",
+    description:
+      "Figura colecionável impressa em alta resolução e pintada à mão, com base redonda. Pose de palco, jaqueta preta e microfone retrô. Peça de estante pra fã de rock clássico.",
+    specs: ["Impressão em alta resolução", "Pintado à mão", "Base redonda inclusa", "Peça decorativa — não é brinquedo"],
+    colors: ["palco"],
+    badge: "Colecionável",
+  },
   {
     slug: "dragao-articulado-cristal",
     name: "Dragão Articulado Cristal",

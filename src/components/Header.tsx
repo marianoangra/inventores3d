@@ -8,6 +8,7 @@ import { STORE, brl } from "@/lib/config";
 import { IconBag, IconSearch, IconX } from "./Icons";
 
 const NAV = [
+  { href: "/produtos?c=invencoes", label: "Invenções", c: "invencoes" },
   { href: "/produtos?c=articulados", label: "Articulados", c: "articulados" },
   { href: "/produtos?c=fidget", label: "Fidget", c: "fidget" },
   { href: "/produtos?c=chaveiros", label: "Chaveiros", c: "chaveiros" },

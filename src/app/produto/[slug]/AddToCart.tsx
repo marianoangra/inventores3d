@@ -5,6 +5,7 @@ import type { Product } from "@/lib/products";
 import { colorOf } from "@/lib/products";
 import { useCart } from "@/components/CartProvider";
 import ProductArt from "@/components/ProductArt";
+import Thumb from "@/components/Thumb";
 import Image from "next/image";
 import { photosOf } from "@/lib/photos";
 import { STORE, brl } from "@/lib/config";
@@ -171,7 +172,7 @@ export default function AddToCart({ product: p }: { product: Product }) {
           </div>
 
           <div className="mt-5 rounded-2xl bg-brand-soft/60 border border-brand/10 p-4 text-sm space-y-2.5">
-            <p className="flex gap-2.5"><IconPrinter size={18} className="text-brand shrink-0" /><span>Impresso sob encomenda — <b>pronto até {ready || "…"}</b></span></p>
+            <p className="flex gap-2.5"><IconPrinter size={18} className="text-brand shrink-0" /><span>Impresso sob encomenda — {p.category === "invencoes" ? <b>prazo combinado no WhatsApp</b> : <b>pronto até {ready || "…"}</b>}</span></p>
             <p className="flex gap-2.5"><IconTruck size={18} className="text-brand shrink-0" /><span>Envio pra todo o Brasil · <b>grátis acima de {brl(STORE.freeShippingFrom)}</b></span></p>
             <p className="flex gap-2.5"><IconShield size={18} className="text-brand shrink-0" /><span>Chegou com defeito? <b>Reimprimimos e reenviamos</b> sem custo</span></p>
           </div>
@@ -214,7 +215,7 @@ export default function AddToCart({ product: p }: { product: Product }) {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 flex items-center gap-3">
           <div className="hidden sm:block w-12 h-12 rounded-xl bg-paper shrink-0">
-            <ProductArt art={p.art} color={color} id="bar" shadow={false} className="w-full h-full" />
+            <Thumb p={p} color={color} id="bar" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-sm font-semibold truncate">{p.name}</p>

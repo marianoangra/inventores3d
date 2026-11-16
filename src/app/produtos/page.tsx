@@ -4,7 +4,7 @@ import Catalog from "./Catalog";
 
 export const metadata: Metadata = {
   title: "Produtos",
-  description: "Brinquedos articulados, fidgets, chaveiros, personalizados e kits de festa impressos em 3D sob encomenda.",
+  description: "Invenções próprias, brinquedos articulados, fidgets, chaveiros, personalizados e kits de festa impressos em 3D sob encomenda.",
   alternates: { canonical: "/produtos" },
 };
 

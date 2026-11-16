@@ -3,19 +3,22 @@ import { PRODUCTS, CATEGORIES } from "@/lib/products";
 import type { Art } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import ProductArt from "@/components/ProductArt";
-import HeroPicker from "@/components/HeroPicker";
+import Image from "next/image";
+import { photosOf } from "@/lib/photos";
 import { STORE, brl } from "@/lib/config";
 import { IconArrow, IconLeaf, IconPix, IconPrinter, IconShield, IconTruck, IconChevron, IconGift, IconSparkle } from "@/components/Icons";
 
 const FAQ = [
   ["É seguro pra criança?", "Usamos PLA, plástico de origem vegetal, atóxico e biodegradável. Chaveiros e peças pequenas não são indicados para menores de 3 anos."],
   ["Quanto tempo demora pra chegar?", `Tudo é impresso sob encomenda: a peça fica pronta em até ${STORE.productionDays} dias úteis e depois segue pelo frete escolhido. Kits de festa: peça com 10 a 15 dias de antecedência.`],
+  ["As invenções são de vocês mesmo?", "Sim. Rok-Cooler, Snap-Pong e as outras peças da categoria Invenções são criadas, projetadas e testadas aqui. Por serem maiores e mais complexas, o prazo de produção é combinado com você no WhatsApp."],
   ["Precisa montar ou colar?", "Não. Os articulados saem da impressora já com todas as juntas encaixadas — é só tirar da caixa e brincar."],
   ["Como funciona o pagamento?", `Você monta a sacola, preenche o endereço e o pedido chega pra gente no WhatsApp. Respondemos com o Pix (${Math.round(STORE.pixDiscount * 100)}% off) ou um link de cartão. Simples e com atendimento de gente de verdade.`],
   ["Vocês fazem atacado ou pedido grande?", "Sim! Escolas, buffets e lojas: chame no WhatsApp pra tabela especial a partir de 30 unidades."],
 ];
 
-const CAT_ART: Record<string, { art: Art; color: string; bg: string }> = {
+const CAT_ART: Record<string, { art: Art; color: string; bg: string; photo?: string }> = {
+  invencoes: { art: "box", color: "espacial", bg: "#eef0f3", photo: "/produtos/rok-cooler-1.webp" },
   articulados: { art: "dragon", color: "galaxy", bg: "#efeaff" },
   fidget: { art: "gear", color: "oceano", bg: "#e6f4fd" },
   chaveiros: { art: "keychain", color: "rosa", bg: "#fdebf3" },
@@ -25,6 +28,7 @@ const CAT_ART: Record<string, { art: Art; color: string; bg: string }> = {
 
 export default function Home() {
   const best = PRODUCTS.filter((p) => p.bestseller);
+  const inv = PRODUCTS.filter((p) => p.category === "invencoes");
   return (
     <>
       {/* HERO */}
@@ -32,25 +36,25 @@ export default function Home() {
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-6 lg:gap-10 items-center">
           <div>
             <span className="hidden sm:inline-flex items-center gap-2 rounded-full bg-white border border-line text-xs font-semibold px-3 py-1.5">
-              <span className="w-2 h-2 rounded-full bg-mint animate-pulse" /> Impresso sob encomenda · feito no Brasil
+              <span className="w-2 h-2 rounded-full bg-mint animate-pulse" /> Inventado, projetado e impresso no Brasil
             </span>
             <h1 className="font-display text-[2.6rem] leading-[1] sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] sm:mt-5">
-              Brinquedos que <span className="relative inline-block text-brand">mexem<svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" aria-hidden><path d="M2 8 Q50 0 100 7 T198 5" stroke="#d4f55a" strokeWidth="6" fill="none" strokeLinecap="round" /></svg></span> cada junta.
+              Invenções que você <span className="relative inline-block text-brand">não acha<svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" aria-hidden><path d="M2 8 Q50 0 100 7 T198 5" stroke="#d4f55a" strokeWidth="6" fill="none" strokeLinecap="round" /></svg></span> em loja.
             </h1>
             <p className="text-base sm:text-lg text-muted mt-4 sm:mt-6 max-w-lg leading-relaxed">
-              Dragões, dinos, axolotes e fidgets articulados, impressos em 3D na cor que você escolher.<span className="hidden sm:inline"> Sem montagem, sem cola — direto da impressora pra sua mão.</span>
+              A gente inventa e imprime em 3D: cooler foguete, jogo de pong de lata, colecionáveis e brinquedos articulados.<span className="hidden sm:inline"> Peças originais, feitas sob encomenda — direto da nossa impressora pra sua casa.</span>
             </p>
             <div className="grid grid-cols-2 sm:flex gap-2.5 sm:gap-3 mt-5 sm:mt-8">
-              <Link href="/produtos" className="inline-flex items-center justify-center gap-2 rounded-full bg-ink hover:bg-brand text-white font-semibold px-4 sm:px-7 h-12 sm:h-14 text-[15px] sm:text-base transition">
-                Ver a coleção <IconArrow size={18} />
+              <Link href="/produtos?c=invencoes" className="inline-flex items-center justify-center gap-2 rounded-full bg-ink hover:bg-brand text-white font-semibold px-4 sm:px-7 h-12 sm:h-14 text-[15px] sm:text-base transition">
+                Ver as invenções <IconArrow size={18} />
               </Link>
-              <Link href="/produtos?c=kits" className="inline-flex items-center justify-center gap-2 rounded-full bg-white border border-line hover:border-ink/40 font-semibold px-4 sm:px-7 h-12 sm:h-14 text-[15px] sm:text-base transition">
-                <IconGift size={18} /> <span className="sm:hidden">Festas</span><span className="hidden sm:inline">Lembrancinhas de festa</span>
+              <Link href="/produtos" className="inline-flex items-center justify-center gap-2 rounded-full bg-white border border-line hover:border-ink/40 font-semibold px-4 sm:px-7 h-12 sm:h-14 text-[15px] sm:text-base transition">
+                <IconGift size={18} /> <span className="sm:hidden">Loja toda</span><span className="hidden sm:inline">Ver a loja toda</span>
               </Link>
             </div>
             <dl className="hidden sm:grid grid-cols-3 gap-3 mt-10 max-w-md">
               {[
-                ["8", "cores de filamento"],
+                [String(inv.length), "invenções da casa"],
                 [`${STORE.productionDays} dias`, "pra ficar pronto"],
                 [`${Math.round(STORE.pixDiscount * 100)}%`, "off no Pix"],
               ].map(([n, l]) => (
@@ -61,8 +65,19 @@ export default function Home() {
               ))}
             </dl>
           </div>
-          <div>
-            <HeroPicker />
+          <div className="grid grid-cols-2 gap-3">
+            {inv.map((p, i) => (
+              <Link
+                key={p.slug}
+                href={`/produto/${p.slug}`}
+                className={`group relative overflow-hidden rounded-[1.75rem] border border-line ${i === 0 ? "col-span-2 aspect-[16/10] bg-[#fafafa]" : "aspect-square"}`}
+              >
+                <Image src={photosOf(p.slug)[0]} alt={p.name} fill priority={i === 0} sizes={i === 0 ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 1024px) 50vw, 25vw"} className={`${i === 0 ? "object-contain" : "object-cover"} group-hover:scale-[1.04] transition duration-500`} />
+                <span className="absolute left-3 bottom-3 rounded-full bg-white/90 backdrop-blur text-xs sm:text-sm font-semibold px-3 py-1.5 border border-line">
+                  {p.name.split(" — ")[0]} · {brl(p.price)}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -97,7 +112,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 flex items-end justify-between gap-4">
           <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">Explore por categoria</h2>
         </div>
-        <div className="mx-auto max-w-7xl mt-6 flex lg:grid lg:grid-cols-5 gap-3 overflow-x-auto no-scrollbar snap-x px-4 sm:px-6">
+        <div className="mx-auto max-w-7xl mt-6 flex lg:grid lg:grid-cols-6 gap-3 overflow-x-auto no-scrollbar snap-x px-4 sm:px-6">
           {CATEGORIES.map((c) => {
             const a = CAT_ART[c.id];
             return (
@@ -107,8 +122,8 @@ export default function Home() {
                 className="group snap-start shrink-0 w-[46%] sm:w-[30%] lg:w-auto rounded-[var(--radius-card)] p-4 flex flex-col transition hover:-translate-y-1"
                 style={{ background: a.bg }}
               >
-                <div className="aspect-square">
-                  <ProductArt art={a.art} color={a.color} id={`cat-${c.id}`} shadow={false} className="w-full h-full group-hover:scale-105 transition duration-500" />
+                <div className="relative aspect-square overflow-hidden rounded-2xl">
+                  {a.photo ? <Image src={a.photo} alt="" fill sizes="(max-width: 1024px) 46vw, 16vw" className="object-cover group-hover:scale-105 transition duration-500" /> : <ProductArt art={a.art} color={a.color} id={`cat-${c.id}`} shadow={false} className="w-full h-full group-hover:scale-105 transition duration-500" />}
                 </div>
                 <p className="font-display font-bold text-lg mt-2">{c.label}</p>
                 <p className="text-xs text-muted">{c.desc}</p>
@@ -167,10 +182,10 @@ export default function Home() {
 
       {/* COMO FUNCIONA */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 mt-20">
-        <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">Como nasce o seu brinquedo</h2>
+        <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">Como nasce a sua peça</h2>
         <ol className="grid md:grid-cols-3 gap-3 sm:gap-4 mt-8">
           {[
-            [IconSparkle, "Você escolhe", "Bicho, cor e, se quiser, um nome. 8 cores, incluindo seda arco-íris e brilha no escuro."],
+            [IconSparkle, "Você escolhe", "Uma invenção da casa, um articulado ou uma peça personalizada — na cor e com o nome que quiser."],
             [IconPrinter, "A gente imprime", `Sua peça entra na fila da impressora e fica pronta em até ${STORE.productionDays} dias úteis, camada por camada.`],
             [IconTruck, "Chega aí", `Embalado com cuidado e enviado pra todo o Brasil. Frete grátis acima de ${brl(STORE.freeShippingFrom)}.`],
           ].map(([Icon, t, d], i) => {

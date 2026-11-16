@@ -12,7 +12,7 @@ export default function Sobre() {
       <section>
         <h1 className="font-display text-5xl font-bold tracking-tight text-ink">Como funciona</h1>
         <p className="mt-4">
-          Cada peça da {STORE.name} é impressa sob encomenda numa impressora 3D de última geração, em PLA — plástico de origem vegetal, atóxico e biodegradável. A produção leva até {STORE.productionDays} dias úteis; depois disso, despachamos pra todo o Brasil. Pedidos acima de {brl(STORE.freeShippingFrom)} têm frete grátis.
+          A {STORE.name} é uma loja de invenções: a gente cria, projeta e testa peças próprias — como o Rok-Cooler e o Snap-Pong — além de brinquedos articulados e personalizados. Cada peça é impressa sob encomenda numa impressora 3D de última geração, em PLA — plástico de origem vegetal, atóxico e biodegradável. A produção leva até {STORE.productionDays} dias úteis; depois disso, despachamos pra todo o Brasil. Pedidos acima de {brl(STORE.freeShippingFrom)} têm frete grátis.
         </p>
       </section>
       <section>

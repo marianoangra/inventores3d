@@ -42,6 +42,7 @@ export default function Footer() {
         <div className="text-sm space-y-2.5">
           <p className="font-semibold text-white mb-3">Loja</p>
           <Link href="/produtos" className="block hover:text-white">Todos os produtos</Link>
+          <Link href="/produtos?c=invencoes" className="block hover:text-white">Invenções</Link>
           <Link href="/produtos?c=articulados" className="block hover:text-white">Articulados</Link>
           <Link href="/produtos?c=kits" className="block hover:text-white">Lembrancinhas de festa</Link>
           <Link href="/produtos?c=personalizados" className="block hover:text-white">Personalizados</Link>

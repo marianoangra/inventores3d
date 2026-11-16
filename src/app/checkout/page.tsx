@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useCart, unitPrice } from "@/components/CartProvider";
-import ProductArt from "@/components/ProductArt";
+import Thumb from "@/components/Thumb";
 import { getProduct, colorOf } from "@/lib/products";
 import { STORE, brl } from "@/lib/config";
 import { readyDate } from "@/lib/delivery";
@@ -225,7 +225,7 @@ export default function Checkout() {
             return (
               <li key={i.key} className="flex items-center gap-3 text-sm">
                 <div className="relative w-14 h-14 rounded-xl bg-paper shrink-0">
-                  <ProductArt art={p.art} color={i.color} id={`co-${i.key}`} shadow={false} className="w-full h-full" />
+                  <Thumb p={p} color={i.color} id={`co-${i.key}`} />
                   <span className="absolute -right-1.5 -top-1.5 grid place-items-center min-w-5 h-5 px-1 rounded-full bg-ink text-white text-[11px] font-bold">{i.qty}</span>
                 </div>
                 <div className="flex-1 min-w-0">

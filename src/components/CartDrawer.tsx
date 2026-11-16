@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useCart, unitPrice } from "./CartProvider";
 import { getProduct, colorOf } from "@/lib/products";
 import { STORE, brl } from "@/lib/config";
-import ProductArt from "./ProductArt";
+import Thumb from "./Thumb";
 import { IconBag, IconMinus, IconPlus, IconTruck, IconX, IconArrow } from "./Icons";
 
 const UPSELL = ["chaveiro-articulado", "fidget-slider-click", "polvo-articulado", "fidget-engrenagem"];
@@ -17,7 +17,7 @@ export function CartToast() {
   return (
     <div key={toast.n} role="status" className="pop-in fixed z-50 left-1/2 -translate-x-1/2 bottom-5 sm:bottom-auto sm:top-24 sm:left-auto sm:right-6 sm:translate-x-0 flex items-center gap-3 rounded-2xl bg-ink text-white pl-2 pr-3 py-2 shadow-2xl w-[calc(100%-2rem)] max-w-sm">
       <div className="w-12 h-12 rounded-xl bg-white/10 shrink-0">
-        <ProductArt art={p.art} color={toast.color} id="toast" shadow={false} className="w-full h-full" />
+        <Thumb p={p} color={toast.color} id="toast" />
       </div>
       <div className="flex-1 min-w-0">
         <p className="text-xs text-lime font-semibold">Adicionado à sacola</p>
@@ -100,7 +100,7 @@ export default function CartDrawer() {
                 return (
                   <li key={i.key} className="flex gap-3.5 py-4">
                     <Link href={`/produto/${p.slug}`} onClick={() => setOpen(false)} className="w-[84px] h-[84px] rounded-2xl bg-white border border-line shrink-0 p-1.5">
-                      <ProductArt art={p.art} color={i.color} id={`c-${i.key}`} shadow={false} className="w-full h-full" />
+                      <Thumb p={p} color={i.color} id={`c-${i.key}`} />
                     </Link>
                     <div className="flex-1 min-w-0">
                       <div className="flex justify-between gap-2">
@@ -144,7 +144,7 @@ export default function CartDrawer() {
                     className="group text-left rounded-2xl bg-white border border-line p-2 hover:border-ink/30 transition"
                   >
                     <div className="aspect-square rounded-xl bg-brand-soft/60">
-                      <ProductArt art={u.art} color={u.colors[0]} id={`up-${u.slug}`} shadow={false} className="w-full h-full" />
+                      <Thumb p={u} color={u.colors[0]} id={`up-${u.slug}`} />
                     </div>
                     <p className="text-[11.5px] font-medium leading-tight mt-1.5 line-clamp-2">{u.name}</p>
                     <p className="text-xs font-bold mt-1 flex items-center justify-between">
