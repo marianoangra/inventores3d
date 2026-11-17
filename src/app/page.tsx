@@ -66,7 +66,7 @@ export default function Home() {
             </dl>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            {inv.map((p, i) => (
+            {inv.filter((p) => p.slug !== "rok-cooler-7-latas").slice(0, 3).map((p, i) => (
               <Link
                 key={p.slug}
                 href={`/produto/${p.slug}`}

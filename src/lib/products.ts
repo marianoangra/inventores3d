@@ -68,10 +68,10 @@ export const PRODUCTS: Product[] = [
     category: "invencoes",
     art: "box",
     price: 649.9,
-    short: "Um foguete de 37 cm que guarda 3 latas no gelo e mais 2 nas laterais.",
+    short: "Um foguete de 38 cm que guarda 3 latas no gelo e mais 2 nas laterais.",
     description:
-      "Invenção da casa: um cooler em forma de foguete, com câmara de gelo, janela dupla transparente pra ver o que tem dentro e dreno rosqueado na frente pra tirar a água do gelo derretido. As paredes grossas, de 16 mm, isolam o gelo. A tampa-ogiva trava com um giro e tem alça pra carregar pra churrasco, piscina ou escritório. A 1ª foto é a arte do conceito; a 2ª é o projeto 3D do Mini.",
-    specs: ["37 cm de altura", "3 latas no gelo + 2 nos porta-latas laterais", "Janela dupla com camada de ar", "Tampa com trava de giro e alça", "Dreno rosqueado com anel de vedação", "Feito sob encomenda — prazo combinado no WhatsApp"],
+      "Invenção da casa: um cooler em forma de foguete, com câmara de gelo, janela dupla transparente pra ver o que tem dentro e dreno rosqueado na frente pra tirar a água do gelo derretido. As paredes grossas, de 14 mm, isolam o gelo. A tampa-ogiva trava com um giro e tem alça pra carregar pra churrasco, piscina ou escritório. A 1ª foto é a arte do conceito; a 2ª é o projeto 3D do Mini.",
+    specs: ["38 cm de altura", "3 latas no gelo + 2 nos porta-latas laterais", "Janela dupla com camada de ar", "Tampa com trava de giro e alça", "Dreno rosqueado com anel de vedação", "Feito sob encomenda — prazo combinado no WhatsApp"],
     colors: ["espacial"],
     badge: "Invenção nossa",
   },
@@ -86,6 +86,19 @@ export const PRODUCTS: Product[] = [
       "Invenção da casa: uma mesinha de pong hexagonal com 6 copinhos, que se prende entre duas latas com travas de encaixe. Abre, encaixa e o jogo está montado em segundos — na mesa do bar, no churrasco ou na sala. Acompanha bolinha.",
     specs: ["6 copinhos em triângulo", "Travas que prendem em latas de 350 ml", "Abre e fecha por encaixe (snap)", "Bolinha inclusa"],
     colors: ["candy"],
+    badge: "Invenção nossa",
+  },
+  {
+    slug: "rok-cooler-7-latas",
+    name: "Rok-Cooler 7 Latas — Cooler Foguete",
+    category: "invencoes",
+    art: "box",
+    price: 949.9,
+    short: "O irmão maior: 7 latas no gelo e mais 2 nas laterais. 43 cm de foguete.",
+    description:
+      "A versão família do nosso cooler foguete. A câmara de gelo leva 7 latas (6 em volta e 1 no meio) — ou 6 com mais espaço pro gelo. Paredes de 16 mm que isolam, janela dupla transparente, dreno rosqueado na frente, tampa-ogiva que trava com um giro e alça no topo. A 1ª foto é a arte do conceito; a 2ª é o projeto 3D desta versão.",
+    specs: ["43 cm de altura", "7 latas no gelo + 2 nos porta-latas laterais", "Câmara de 4,7 litros", "Janela dupla com camada de ar", "Tampa com trava de giro e alça", "Feito sob encomenda — prazo combinado no WhatsApp"],
+    colors: ["espacial"],
     badge: "Invenção nossa",
   },
   {

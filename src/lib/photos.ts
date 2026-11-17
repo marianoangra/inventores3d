@@ -3,6 +3,7 @@
 // Ex.: "dragao-articulado-cristal": ["/produtos/dragao-cristal-1.webp", "/produtos/dragao-cristal-2.webp"],
 export const PHOTOS: Record<string, string[]> = {
   "rok-cooler": ["/produtos/rok-cooler-1.webp", "/produtos/rok-cooler-2.webp"],
+  "rok-cooler-7-latas": ["/produtos/rok-cooler-1.webp", "/produtos/rok-cooler-7latas-2.webp"],
   "snap-pong": ["/produtos/snap-pong-1.webp"],
   "boneco-rei-do-rock": ["/produtos/rei-do-rock-1.webp"],
 };
