@@ -70,7 +70,7 @@ export const PRODUCTS: Product[] = [
     price: 649.9,
     short: "Um foguete de 38 cm que guarda 3 latas no gelo e mais 2 nas laterais.",
     description:
-      "Invenção da casa: um cooler em forma de foguete, com câmara de gelo, janela dupla transparente pra ver o que tem dentro e dreno rosqueado na frente pra tirar a água do gelo derretido. As paredes grossas, de 14 mm, isolam o gelo. A tampa-ogiva trava com um giro e tem alça pra carregar pra churrasco, piscina ou escritório. A 1ª foto é a arte do conceito; a 2ª é o projeto 3D do Mini.",
+      "Invenção da casa: um cooler em forma de foguete, com câmara de gelo, janela dupla transparente pra ver o que tem dentro e dreno rosqueado na frente pra tirar a água do gelo derretido. As paredes grossas, de 14 mm, isolam o gelo. A tampa-ogiva trava com um giro e tem alça pra carregar pra churrasco, piscina ou escritório. As fotos são do projeto 3D (latas meramente ilustrativas); a última é a arte do conceito.",
     specs: ["38 cm de altura", "3 latas no gelo + 2 nos porta-latas laterais", "Janela dupla com camada de ar", "Tampa com trava de giro e alça", "Dreno rosqueado com anel de vedação", "Feito sob encomenda — prazo combinado no WhatsApp"],
     colors: ["espacial"],
     badge: "Invenção nossa",
@@ -96,7 +96,7 @@ export const PRODUCTS: Product[] = [
     price: 949.9,
     short: "O irmão maior: 7 latas no gelo e mais 2 nas laterais. 43 cm de foguete.",
     description:
-      "A versão família do nosso cooler foguete. A câmara de gelo leva 7 latas (6 em volta e 1 no meio) — ou 6 com mais espaço pro gelo. Paredes de 16 mm que isolam, janela dupla transparente, dreno rosqueado na frente, tampa-ogiva que trava com um giro e alça no topo. A 1ª foto é a arte do conceito; a 2ª é o projeto 3D desta versão.",
+      "A versão família do nosso cooler foguete. A câmara de gelo leva 7 latas (6 em volta e 1 no meio) — ou 6 com mais espaço pro gelo. Paredes de 16 mm que isolam, janela dupla transparente, dreno rosqueado na frente, tampa-ogiva que trava com um giro e alça no topo. As fotos são do projeto 3D (latas meramente ilustrativas); a última é a arte do conceito.",
     specs: ["43 cm de altura", "7 latas no gelo + 2 nos porta-latas laterais", "Câmara de 4,7 litros", "Janela dupla com camada de ar", "Tampa com trava de giro e alça", "Feito sob encomenda — prazo combinado no WhatsApp"],
     colors: ["espacial"],
     badge: "Invenção nossa",

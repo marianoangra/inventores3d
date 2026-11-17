@@ -70,7 +70,7 @@ export default function Home() {
               <Link
                 key={p.slug}
                 href={`/produto/${p.slug}`}
-                className={`group relative overflow-hidden rounded-[1.75rem] border border-line ${i === 0 ? "col-span-2 aspect-[16/10] bg-[#fafafa]" : "aspect-square"}`}
+                className={`group relative overflow-hidden rounded-[1.75rem] border border-line ${i === 0 ? "col-span-2 aspect-[16/10] bg-[#ecebe8]" : "aspect-square"}`}
               >
                 <Image src={photosOf(p.slug)[0]} alt={p.name} fill priority={i === 0} sizes={i === 0 ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 1024px) 50vw, 25vw"} className={`${i === 0 ? "object-contain" : "object-cover"} group-hover:scale-[1.04] transition duration-500`} />
                 <span className="absolute left-3 bottom-3 rounded-full bg-white/90 backdrop-blur text-xs sm:text-sm font-semibold px-3 py-1.5 border border-line">
