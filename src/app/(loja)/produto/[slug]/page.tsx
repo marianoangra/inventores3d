@@ -19,6 +19,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: p.name,
     description: `${p.short} ${p.description}`.slice(0, 160),
     alternates: { canonical: `/produto/${p.slug}` },
+    // a imagem mora fora do route group (loja) para manter a URL /produto/<slug>/opengraph-image
+    openGraph: { type: "website", locale: "pt_BR", siteName: STORE.name, url: STORE.url, images: [{ url: `/produto/${p.slug}/opengraph-image`, width: 1200, height: 630, type: "image/png" }] },
+    twitter: { card: "summary_large_image", images: [{ url: `/produto/${p.slug}/opengraph-image`, width: 1200, height: 630, type: "image/png" }] },
   };
 }
 

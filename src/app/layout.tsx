@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 import "./globals.css";
-import { CartProvider } from "@/components/CartProvider";
-import Header from "@/components/Header";
-import Footer, { WhatsFloat } from "@/components/Footer";
-import CartDrawer, { CartToast } from "@/components/CartDrawer";
 import { STORE } from "@/lib/config";
 import type { Viewport } from "next";
 
@@ -45,14 +41,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             }),
           }}
         />
-        <CartProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-          <CartDrawer />
-          <CartToast />
-          <WhatsFloat />
-        </CartProvider>
+        {children}
       </body>
     </html>
   );
