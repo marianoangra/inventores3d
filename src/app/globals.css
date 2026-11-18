@@ -18,6 +18,42 @@
   --radius-card: 1.5rem;
 }
 
+/* ---- Lab (área logada): tokens com modo claro/escuro. Só as classes lab-* usam. ---- */
+@theme inline {
+  --color-lab-bg: var(--lab-bg);
+  --color-lab-card: var(--lab-card);
+  --color-lab-text: var(--lab-text);
+  --color-lab-muted: var(--lab-muted);
+  --color-lab-line: var(--lab-line);
+  --color-lab-soft: var(--lab-soft);
+}
+:root {
+  --lab-bg: #fbfaf7;
+  --lab-card: #ffffff;
+  --lab-text: #15121f;
+  --lab-muted: #6b6878;
+  --lab-line: #ebe8f0;
+  --lab-soft: #efeaff;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-lab-theme="light"]) {
+    --lab-bg: #0f0d17;
+    --lab-card: #1b1828;
+    --lab-text: #f3f1f8;
+    --lab-muted: #a5a1b8;
+    --lab-line: #2d2942;
+    --lab-soft: #2a2247;
+  }
+}
+:root[data-lab-theme="dark"] {
+  --lab-bg: #0f0d17;
+  --lab-card: #1b1828;
+  --lab-text: #f3f1f8;
+  --lab-muted: #a5a1b8;
+  --lab-line: #2d2942;
+  --lab-soft: #2a2247;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
