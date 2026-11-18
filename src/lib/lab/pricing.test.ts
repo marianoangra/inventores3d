@@ -52,3 +52,14 @@ test("taxa ≥100% vira erro", () => {
 test("tempo zero: lucro/hora null", () => {
   expect((quote(10, 50, 0, resolveFees())[0] as Ok).profitPerMachineHour).toBeNull();
 });
+
+test("override só do percentual mantém a taxa fixa padrão da faixa", () => {
+  const f = resolveFees({ shopee: { pct: 0.18 } });
+  expect(f.shopee.at(50)).toEqual({ pct: 0.18, fixed: 4.5 });
+  expect(f.shopee.at(150)).toEqual({ pct: 0.18, fixed: 20 });
+});
+
+test("override vindo do banco com campo nulo é ignorado", () => {
+  const f = resolveFees(JSON.parse('{"ml":{"pct":null,"fixed":3}}'));
+  expect(f.ml.at(30)).toEqual({ pct: 0.14, fixed: 3 });
+});
