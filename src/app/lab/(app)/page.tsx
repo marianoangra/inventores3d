@@ -4,14 +4,14 @@ import Edy from "@/components/lab/Edy";
 import GroupCard from "@/components/lab/GroupCard";
 import FirstSteps from "@/components/lab/FirstSteps";
 import MonthCards from "@/components/lab/MonthCards";
-import { getProfile, getWorkshop } from "@/lib/lab/data";
+import { getWorkshop, requireOnboarded } from "@/lib/lab/data";
 import { getMonth } from "@/lib/lab/month-data";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = { title: "Início" };
 
 export default async function LabHome() {
-  const profile = (await getProfile())!;
+  const profile = await requireOnboarded(); // layout e página rodam em paralelo: a página também precisa redirecionar
   const supabase = await createClient();
   const [{ reviewed }, parts, month] = await Promise.all([
     getWorkshop(),
