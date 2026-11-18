@@ -50,6 +50,7 @@ export default function Footer() {
         <div className="text-sm space-y-2.5">
           <p className="font-semibold text-white mb-3">Ajuda</p>
           <Link href="/sobre" className="block hover:text-white">Como funciona</Link>
+          {process.env.NEXT_PUBLIC_LAB_PUBLICO === "1" && <Link href="/lab" className="block hover:text-white">Lab grátis para makers</Link>}
           <Link href="/sobre#trocas" className="block hover:text-white">Trocas e devoluções</Link>
           <Link href="/sobre#privacidade" className="block hover:text-white">Privacidade</Link>
           <a href={`https://instagram.com/${STORE.instagram}`} target="_blank" rel="noopener" className="block hover:text-white">Instagram @{STORE.instagram}</a>

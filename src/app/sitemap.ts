@@ -8,5 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${STORE.url}/produtos`, priority: 0.9 },
     ...PRODUCTS.map((p) => ({ url: `${STORE.url}/produto/${p.slug}`, priority: 0.8 })),
     { url: `${STORE.url}/sobre`, priority: 0.3 },
+    ...(process.env.NEXT_PUBLIC_LAB_PUBLICO === "1" ? [{ url: `${STORE.url}/lab/entrar`, priority: 0.6 }] : []),
   ];
 }

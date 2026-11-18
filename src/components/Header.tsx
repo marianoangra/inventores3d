@@ -99,6 +99,11 @@ export default function Header() {
             </Suspense>
           </nav>
           <div className="flex items-center gap-2 ml-auto lg:ml-0">
+            {process.env.NEXT_PUBLIC_LAB_PUBLICO === "1" && (
+              <Link href="/lab" className="hidden sm:flex items-center h-10 rounded-full px-3.5 text-sm font-semibold text-brand hover:bg-brand-soft transition">
+                Lab grátis
+              </Link>
+            )}
             <button
               onClick={() => setSearchOpen(true)}
               className="flex items-center gap-2 h-10 rounded-full border border-line bg-white px-3 sm:pl-3.5 sm:pr-5 text-sm text-muted hover:border-ink/30 transition"
