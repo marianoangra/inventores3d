@@ -24,3 +24,10 @@ test("canal impossível fica null no preço", () => {
   if ("error" in r) throw new Error(r.error);
   expect(r.prices.ml).toBeNull();
 });
+
+test("depois de salvar uma peça nova, o próximo salvar atualiza a mesma peça", async () => {
+  const { draftId } = await import("./part");
+  expect(draftId(undefined, null)).toBeUndefined();
+  expect(draftId(undefined, "novo-id")).toBe("novo-id");
+  expect(draftId("editando", null)).toBe("editando");
+});

@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { DEFAULT_FILAMENT, DEFAULT_WORKSHOP, PRINTER_MODELS } from "@/lib/lab/defaults";
 import { normalizeWhatsapp } from "@/lib/lab/phone";
+import { setupPlan } from "@/lib/lab/setup";
 
 export type OnboardState = { errors?: Partial<Record<"name" | "printer" | "whatsapp" | "privacy" | "form", string>> };
 
@@ -36,28 +37,23 @@ export async function completeOnboarding(_: OnboardState, form: FormData): Promi
   });
   if (e1) return { errors: { form: "Não deu pra salvar agora. Tente de novo." } };
 
-  // monta a oficina inicial só uma vez
-  const { count } = await supabase.from("printers").select("id", { count: "exact", head: true });
-  if (!count) {
-    const r = await Promise.all([
-      supabase.from("printers").insert({ name: model!.label, price: model!.price, watts: model!.watts, life_hours: DEFAULT_WORKSHOP.printerLifeHours }),
-      supabase.from("filaments").insert({ type: DEFAULT_FILAMENT.type, color: DEFAULT_FILAMENT.color, spool_price: DEFAULT_FILAMENT.spoolPrice, spool_grams: DEFAULT_FILAMENT.spoolGrams }),
-      supabase.from("workshop_settings").upsert(
-        {
-          user_id: uid,
-          kwh_price: DEFAULT_WORKSHOP.kwhPrice,
-          labor_hourly: DEFAULT_WORKSHOP.laborHourly,
-          loss_pct: DEFAULT_WORKSHOP.lossPct,
-          packaging: DEFAULT_WORKSHOP.packaging,
-          margin_pct: DEFAULT_WORKSHOP.marginPct,
-        },
-        { onConflict: "user_id" },
-      ),
-    ]);
-    if (r.some((x) => x.error)) return { errors: { form: "Não deu pra montar sua oficina. Tente de novo." } };
-  }
+  // monta a oficina inicial; cada parte é conferida separadamente (retentativa completa o que faltou)
+  const cnt = async (t: string) => (await supabase.from(t).select("id", { count: "exact", head: true })).count ?? 0;
+  const plan = setupPlan({ printers: await cnt("printers"), filaments: await cnt("filaments"), settings: await cnt("workshop_settings") });
+  const r = await Promise.all([
+    plan.printer ? supabase.from("printers").insert({ name: model!.label, price: model!.price, watts: model!.watts, life_hours: DEFAULT_WORKSHOP.printerLifeHours }) : null,
+    plan.filament ? supabase.from("filaments").insert({ type: DEFAULT_FILAMENT.type, color: DEFAULT_FILAMENT.color, spool_price: DEFAULT_FILAMENT.spoolPrice, spool_grams: DEFAULT_FILAMENT.spoolGrams }) : null,
+    plan.settings
+      ? supabase.from("workshop_settings").upsert(
+          { user_id: uid, kwh_price: DEFAULT_WORKSHOP.kwhPrice, labor_hourly: DEFAULT_WORKSHOP.laborHourly, loss_pct: DEFAULT_WORKSHOP.lossPct, packaging: DEFAULT_WORKSHOP.packaging, margin_pct: DEFAULT_WORKSHOP.marginPct },
+          { onConflict: "user_id" },
+        )
+      : null,
+  ]);
+  if (r.some((x) => x?.error)) return { errors: { form: "Não deu pra montar sua oficina. Tente de novo." } };
 
-  await supabase.from("profiles").update({ onboarded_at: now }).eq("id", uid);
+  const done = await supabase.from("profiles").update({ onboarded_at: now }).eq("id", uid);
+  if (done.error) return { errors: { form: "Não deu pra concluir agora. Tente de novo." } };
   redirect("/lab/boas-vindas?pronto=1");
 }
 

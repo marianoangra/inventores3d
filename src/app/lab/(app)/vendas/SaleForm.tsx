@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useRef, useState, useTransition } from "react";
 import { addSale } from "./actions";
 import { CHANNEL_LABEL, CHANNELS, type Channel } from "@/lib/lab/fees";
 import type { FormState } from "@/components/lab/ActionForm";
@@ -16,6 +16,7 @@ export default function SaleForm({ parts, today }: { parts: PartOpt[]; today: st
   const [channel, setChannel] = useState<Channel>("direto");
   const [price, setPrice] = useState("");
   const form = useRef<HTMLFormElement>(null);
+  const [, startTransition] = useTransition();
 
   useEffect(() => {
     const p = parts.find((x) => x.id === partId);
@@ -24,6 +25,7 @@ export default function SaleForm({ parts, today }: { parts: PartOpt[]; today: st
 
   useEffect(() => {
     if (state.ok) {
+      form.current?.reset();
       const p = parts.find((x) => x.id === partId);
       setPrice(p ? fmt(p.prices[channel]) : "");
     }
@@ -31,7 +33,14 @@ export default function SaleForm({ parts, today }: { parts: PartOpt[]; today: st
   }, [state]);
 
   return (
-    <form ref={form} action={action} className="rounded-3xl border border-lab-line bg-lab-card p-5 sm:p-6 space-y-4">
+    <form
+      ref={form}
+      onSubmit={(e) => {
+        e.preventDefault();
+        const fd = new FormData(e.currentTarget);
+        startTransition(() => action(fd));
+      }}
+      className="rounded-3xl border border-lab-line bg-lab-card p-5 sm:p-6 space-y-4">
       <h2 className="font-display text-lg font-extrabold">Lançar venda</h2>
       <div className="grid gap-3 sm:grid-cols-2">
         <div className="sm:col-span-2">

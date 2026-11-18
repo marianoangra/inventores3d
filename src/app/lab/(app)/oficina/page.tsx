@@ -55,7 +55,7 @@ export default async function OficinaPage() {
           ))}
           <details className="rounded-2xl border border-dashed border-lab-line p-4">
             <summary className="cursor-pointer text-sm font-semibold text-brand">+ Adicionar impressora</summary>
-            <ActionForm action={savePrinter} submit="Adicionar" className="mt-3 space-y-3">
+            <ActionForm action={savePrinter} submit="Adicionar" resetOnOk className="mt-3 space-y-3">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div className="col-span-2 sm:col-span-1"><Input label="Nome" name="name" type="text" /></div>
                 <Input label="Quanto pagou" name="price" prefix="R$" />
@@ -88,7 +88,7 @@ export default async function OficinaPage() {
           ))}
           <details className="rounded-2xl border border-dashed border-lab-line p-4">
             <summary className="cursor-pointer text-sm font-semibold text-brand">+ Adicionar filamento</summary>
-            <ActionForm action={saveFilament} submit="Adicionar" className="mt-3 space-y-3">
+            <ActionForm action={saveFilament} submit="Adicionar" resetOnOk className="mt-3 space-y-3">
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <Input label="Tipo" name="type" type="text" defaultValue="PLA" />
                 <Input label="Cor" name="color" type="text" />

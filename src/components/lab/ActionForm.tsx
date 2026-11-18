@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useRef, useTransition } from "react";
 
 export type FormState = { ok?: string; error?: string };
 type Action = (prev: FormState, form: FormData) => Promise<FormState>;
@@ -12,14 +12,28 @@ export default function ActionForm({
   submit = "Salvar",
   className = "",
   variant = "primary",
+  resetOnOk = false,
 }: {
   action: Action;
   children?: React.ReactNode;
   submit?: string;
   className?: string;
   variant?: "primary" | "ghost" | "danger";
+  /** limpa os campos depois de salvar com sucesso (formulários de "adicionar") */
+  resetOnOk?: boolean;
 }) {
   const [state, formAction, pending] = useActionState<FormState, FormData>(action, {});
+  const [, startTransition] = useTransition();
+  const ref = useRef<HTMLFormElement>(null);
+  // o React 19 limpa o formulário depois de toda action (até com erro): enviamos via onSubmit pra manter o que foi digitado
+  useEffect(() => {
+    if (resetOnOk && state.ok) ref.current?.reset();
+  }, [state, resetOnOk]);
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    startTransition(() => formAction(fd));
+  };
   const btn =
     variant === "primary"
       ? "h-11 rounded-full bg-brand px-5 text-sm font-semibold text-white hover:bg-brand-dark"
@@ -27,7 +41,7 @@ export default function ActionForm({
         ? "h-9 rounded-full px-3 text-sm font-medium text-coral hover:bg-coral/10"
         : "h-9 rounded-full px-3 text-sm font-medium text-lab-muted hover:bg-lab-soft hover:text-lab-text";
   return (
-    <form action={formAction} className={className}>
+    <form ref={ref} onSubmit={onSubmit} className={className}>
       {children}
       <div className="flex flex-wrap items-center gap-3">
         <button disabled={pending} className={`${btn} disabled:opacity-60`}>

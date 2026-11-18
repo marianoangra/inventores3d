@@ -24,7 +24,7 @@ export default async function DespesasPage({ searchParams }: { searchParams: Pro
       </header>
       <section className="rounded-3xl border border-lab-line bg-lab-card p-5 sm:p-6">
         <h2 className="font-display text-lg font-extrabold mb-4">Lançar despesa</h2>
-        <ActionForm action={addExpense} submit="Lançar despesa" className="space-y-4">
+        <ActionForm action={addExpense} submit="Lançar despesa" resetOnOk className="space-y-4">
           <div className="grid gap-3 sm:grid-cols-2">
             <Input label="Descrição" name="description" type="text" />
             <label className="block">

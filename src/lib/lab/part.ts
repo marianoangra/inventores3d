@@ -35,3 +35,8 @@ export function buildPart(d: PartDraft, ws: WorkshopSettings, printer: Printer |
   }
   return { unitCost: Math.round(cost.total * 100) / 100, prices, profitPerHour };
 }
+
+/** Id a mandar no salvar: a peça em edição, ou a que acabou de ser criada nesta tela (evita duplicar). */
+export function draftId(initialId: string | undefined, savedId: string | null): string | undefined {
+  return initialId ?? savedId ?? undefined;
+}

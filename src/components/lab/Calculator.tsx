@@ -8,6 +8,8 @@ import { CHANNEL_LABEL, FEE_NOTES, FEES_CHECKED_AT, resolveFees } from "@/lib/la
 import { DEFAULT_FILAMENT, DEFAULT_WORKSHOP, PRINTER_MODELS } from "@/lib/lab/defaults";
 import type { Filament, PartDraft, Printer, WorkshopSettings } from "@/lib/lab/types";
 import { brl } from "@/lib/config";
+import { draftId } from "@/lib/lab/part";
+import Link from "next/link";
 
 const FALLBACK_WORKSHOP: WorkshopSettings = { ...DEFAULT_WORKSHOP, feeOverrides: {} };
 const FALLBACK_PRINTERS: Printer[] = PRINTER_MODELS.filter((m) => m.id !== "outra").map((m) => ({
@@ -26,7 +28,7 @@ type Props = {
   printers?: Printer[];
   filaments?: Filament[];
   initial?: PartDraft;
-  onSave?: (p: PartDraft) => Promise<{ error?: string } | void>;
+  onSave?: (p: PartDraft) => Promise<{ error?: string; id?: string } | void>;
 };
 
 export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FALLBACK_PRINTERS, filaments = FALLBACK_FILAMENTS, initial, onSave }: Props) {
@@ -41,6 +43,7 @@ export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FA
   const [filamentId, setFilamentId] = useState(initial?.filamentId ?? filaments[0]?.id ?? "");
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
+  const [savedId, setSavedId] = useState<string | null>(null);
 
   const printer = printers.find((p) => p.id === printerId) ?? printers[0];
   const filament = filaments.find((f) => f.id === filamentId) ?? filaments[0];
@@ -89,7 +92,7 @@ export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FA
     setSaving(true);
     setMsg(null);
     const r = await onSave({
-      id: initial?.id,
+      id: draftId(initial?.id, savedId),
       name: name.trim(),
       grams: g!,
       printMinutes: printMinutes!,
@@ -100,6 +103,7 @@ export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FA
       marginPct: mg!,
     });
     setSaving(false);
+    if (r && r.id) setSavedId(r.id);
     setMsg(r && r.error ? r.error : "Peça salva!");
   };
 
@@ -154,9 +158,12 @@ export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FA
         {onSave && (
           <div className="flex items-center gap-3 pt-1">
             <button onClick={save} disabled={saving} className="h-11 rounded-full bg-brand px-6 text-sm font-semibold text-white hover:bg-brand-dark disabled:opacity-60">
-              {saving ? "Salvando…" : initial?.id ? "Salvar alterações" : "Salvar como peça"}
+              {saving ? "Salvando…" : initial?.id || savedId ? "Salvar alterações" : "Salvar como peça"}
             </button>
             {msg && <p className="text-sm text-lab-muted" role="status">{msg}</p>}
+            {savedId && !initial?.id && (
+              <Link href={`/lab/pecas/${savedId}`} className="text-sm font-semibold text-brand">Ver peça</Link>
+            )}
           </div>
         )}
       </section>
