@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/browser";
+import { sendLoginEmail } from "./actions";
 
 const input = "h-12 w-full rounded-xl border border-lab-line bg-lab-card px-4 text-[15px] text-lab-text outline-none focus:border-brand";
 const btn = "h-12 w-full rounded-full bg-brand text-white font-semibold hover:bg-brand-dark disabled:opacity-60 transition";
@@ -14,6 +15,10 @@ export default function LoginForm({ next, google }: { next: string; google: bool
   const [step, setStep] = useState<"email" | "code">("email");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  // se o Supabase devolver o link aqui (Site URL), repassa os tokens do # pra tela que cria a sessão
+  useEffect(() => {
+    if (/access_token=|error_code=/.test(window.location.hash)) window.location.replace(`/lab/auth/confirmar?next=${encodeURIComponent(next)}${window.location.hash}`);
+  }, [next]);
   const callback = () => `${window.location.origin}/lab/auth/callback?next=${encodeURIComponent(next)}`;
 
   const sendCode = async (e: React.FormEvent) => {
@@ -21,12 +26,9 @@ export default function LoginForm({ next, google }: { next: string; google: bool
     setErr(null);
     if (!/^\S+@\S+\.\S+$/.test(email.trim())) return setErr("Digite um e-mail válido.");
     setBusy(true);
-    const { error } = await createClient().auth.signInWithOtp({
-      email: email.trim().toLowerCase(),
-      options: { shouldCreateUser: true, emailRedirectTo: callback() },
-    });
+    const { error } = await sendLoginEmail(email, next);
     setBusy(false);
-    if (error) return setErr(error.status === 429 ? "Muitas tentativas. Espere um minuto e tente de novo." : "Não deu pra enviar o código. Tente de novo.");
+    if (error) return setErr(error);
     setStep("code");
   };
 
@@ -78,7 +80,7 @@ export default function LoginForm({ next, google }: { next: string; google: bool
       ) : (
         <form onSubmit={verify} className="space-y-3">
           <p className="text-sm">
-            Mandamos um código de 6 dígitos para <b>{email}</b>. Pode levar um minutinho — olhe também o spam.
+            Mandamos um e-mail para <b>{email}</b>. Clique no link (funciona em qualquer navegador) ou digite o código de 6 dígitos, se vier. Olhe também o spam.
           </p>
           <label htmlFor="code" className="block text-sm font-medium">Código</label>
           <input

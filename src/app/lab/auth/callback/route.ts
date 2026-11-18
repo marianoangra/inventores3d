@@ -13,8 +13,17 @@ export async function GET(request: NextRequest) {
   const type = sp.get("type") as EmailOtpType | null;
 
   let ok = false;
-  if (code) ok = !(await supabase.auth.exchangeCodeForSession(code)).error;
-  else if (tokenHash && type) ok = !(await supabase.auth.verifyOtp({ token_hash: tokenHash, type })).error;
+  let reason = sp.get("error_code") || sp.get("error") || "";
+  if (code) {
+    const r = await supabase.auth.exchangeCodeForSession(code);
+    ok = !r.error;
+    if (r.error) reason = `code:${r.error.code ?? r.error.message}`;
+  } else if (tokenHash && type) {
+    const r = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
+    ok = !r.error;
+    if (r.error) reason = `token_hash:${r.error.code ?? r.error.message}`;
+  } else if (!reason) reason = "sem_parametros";
+  if (!ok) console.warn("[lab/callback] falhou:", reason);
 
   const to = request.nextUrl.clone();
   to.search = "";
