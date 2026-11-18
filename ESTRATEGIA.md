@@ -35,3 +35,11 @@
 ## Onde editar
 - Produtos/preços/cores: `src/lib/products.ts`
 - Frete grátis, desconto Pix, prazo, WhatsApp: `src/lib/config.ts`
+
+## Lab (área logada grátis) — /lab
+- No ar ESCONDIDO desde 18/11/2026: só entra quem tem o link. Design em `docs/superpowers/specs/2026-11-18-lab-area-logada-design.md`.
+- **Lançar**: na Vercel, definir `NEXT_PUBLIC_LAB_PUBLICO=1` (mostra "Lab grátis" no topo e rodapé da loja) e `NEXT_PUBLIC_LAB_WHATSAPP_GROUP=<link do grupo>` (mostra o convite). Redeploy.
+- **Login Google**: criar OAuth no Google Cloud + ativar no Supabase, depois `NEXT_PUBLIC_LAB_GOOGLE=1`.
+- **E-mail do código**: o SMTP padrão do Supabase só entrega pra quem é do time — antes de lançar, configurar SMTP do Resend com inventores3d.com.br.
+- Taxas Shopee/ML: `src/lib/lab/fees.ts` (atualizar `FEES_CHECKED_AT`). Aulas: `src/lib/lab/lessons.ts` (preencher `youtubeId`).
+- Banco: `supabase/migrations/*.sql` aplicam sozinhas no build da Vercel; o teste de isolamento entre contas roda nas prévias (`scripts/rls-check.mjs`).
