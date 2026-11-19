@@ -43,3 +43,14 @@ test("despesa com categoria inválida ou valor negativo é erro", () => {
   expect(buildExpense({ description: "x", category: "viagem", amount: "10", spentOn: today })).toHaveProperty("error");
   expect(buildExpense({ description: "x", category: "outros", amount: "-1", spentOn: today })).toHaveProperty("error");
 });
+
+test("buildSale com taxas grava a taxa do canal na venda", async () => {
+  const { resolveFees } = await import("./fees");
+  const { buildSale, unitFee } = await import("./entries");
+  const fees = resolveFees({});
+  const r = buildSale({ description: "Vaso", qty: "1", unitPrice: "50", channel: "shopee", soldOn: "2026-11-19" }, null, fees);
+  expect("error" in r).toBe(false);
+  if (!("error" in r)) expect(r.unit_fee).toBe(unitFee(fees.shopee, 50));
+  const d = buildSale({ description: "Vaso", qty: "1", unitPrice: "50", channel: "direto", soldOn: "2026-11-19" }, null, fees);
+  if (!("error" in d)) expect(d.unit_fee).toBe(unitFee(fees.direto, 50));
+});

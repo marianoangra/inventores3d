@@ -1,4 +1,4 @@
-import { CHANNELS, type Channel } from "./fees";
+import { CHANNELS, type Channel, type FeeRule } from "./fees";
 import { parseNum } from "./num";
 
 export const EXPENSE_CATEGORIES = {
@@ -16,10 +16,22 @@ type PartSnap = { id: string; name: string; unitCost: number; printMinutes: numb
 
 const isDate = (s: string) => /^\d{4}-\d{2}-\d{2}$/.test(s) && !Number.isNaN(Date.parse(s + "T12:00:00Z"));
 
-export type SaleInsert = { part_id: string | null; description: string; qty: number; unit_price: number; unit_cost: number; print_minutes: number; channel: Channel; sold_on: string };
+export type SaleInsert = { part_id: string | null; description: string; qty: number; unit_price: number; unit_cost: number; print_minutes: number; channel: Channel; sold_on: string; unit_fee?: number };
 export type ExpenseInsert = { description: string; category: ExpenseCategory; amount: number; spent_on: string };
 
-export function buildSale(i: SaleInput, part: PartSnap): SaleInsert | { error: string } {
+/** Taxa por unidade no preço dado, arredondada em centavos. */
+export function unitFee(rule: FeeRule, price: number): number {
+  const { pct, fixed } = rule.at(price);
+  return Math.round((pct * price + fixed) * 100) / 100;
+}
+
+export function buildSale(i: SaleInput, part: PartSnap, fees?: Record<Channel, FeeRule>): SaleInsert | { error: string } {
+  const r = buildSaleBase(i, part);
+  if ("error" in r || !fees) return r;
+  return { ...r, unit_fee: unitFee(fees[r.channel], r.unit_price) };
+}
+
+function buildSaleBase(i: SaleInput, part: PartSnap): SaleInsert | { error: string } {
   const qty = parseNum(i.qty);
   const price = parseNum(i.unitPrice);
   if (qty === null || !Number.isInteger(qty) || qty < 1) return { error: "Quantidade precisa ser um número inteiro (1, 2, 3…)." };

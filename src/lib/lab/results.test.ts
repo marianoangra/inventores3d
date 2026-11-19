@@ -50,3 +50,13 @@ test("topParts limita a 5", () => {
   const many = Array.from({ length: 8 }, (_, i) => sale({ description: `P${i}`, qty: i + 1 }));
   expect(monthSummary(many, [], fees).topParts).toHaveLength(5);
 });
+
+test("taxa congelada na venda vale mais que a taxa atual", async () => {
+  const { resolveFees } = await import("./fees");
+  const fees = resolveFees({});
+  const base = { description: "X", qty: 2, unitPrice: 100, unitCost: 10, printMinutes: 60, channel: "shopee" as const, partId: null };
+  const congelada = monthSummary([{ ...base, unitFee: 7 }], [], fees);
+  expect(congelada.fees).toBe(14);
+  const antiga = monthSummary([base], [], fees);
+  expect(antiga.fees).toBeGreaterThan(0);
+});

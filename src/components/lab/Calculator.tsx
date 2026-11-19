@@ -56,12 +56,17 @@ export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FA
   const mg = parseNum(margin);
   const printMinutes = h !== null && m !== null ? Math.round(h * 60 + m) : null;
 
+  // preenchido mas não é número >= 0
+  const bad = (txt: string, n: number | null) => txt.trim() !== "" && (n === null || n < 0);
   const errs = {
-    grams: grams && g === null ? "Use só números (ex.: 45 ou 45,5)" : null,
-    time: (hours && h === null) || (mins && m === null) ? "Tempo inválido" : null,
-    margin: margin && mg === null ? "Use só números" : null,
+    grams: bad(grams, g) ? "Use um número positivo (ex.: 45 ou 45,5)" : null,
+    time: bad(hours, h) || bad(mins, m) ? "Tempo inválido (só números positivos)" : null,
+    labor: bad(labor, lab) ? "Minutos positivos (ex.: 5)" : null,
+    packaging: bad(packaging, pack) ? "Valor positivo (ex.: 2,50)" : null,
+    margin: bad(margin, mg) ? "Use um número positivo" : null,
   };
-  const missing = g === null || !printMinutes || mg === null;
+  const hasErr = Object.values(errs).some(Boolean);
+  const missing = hasErr || g === null || !printMinutes || mg === null;
 
   type Result = { error: string } | { cost: CostBreakdown; quotes: ChannelQuote[] } | null;
   const result = useMemo((): Result => {
@@ -86,7 +91,7 @@ export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FA
 
   const save = async () => {
     if (!onSave || !name.trim() || missing) {
-      setMsg(!name.trim() ? "Dê um nome pra peça antes de salvar." : "Preencha peso e tempo.");
+      setMsg(!name.trim() ? "Dê um nome pra peça antes de salvar." : hasErr ? "Corrija os campos em vermelho." : "Preencha peso e tempo.");
       return;
     }
     setSaving(true);
@@ -148,8 +153,8 @@ export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FA
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3">
-          <Field label="Acabamento" value={labor} onChange={setLabor} suffix="min" hint="Tirar suporte, montar" />
-          <Field label="Embalagem" value={packaging} onChange={setPackaging} prefix="R$" />
+          <Field label="Acabamento" value={labor} onChange={setLabor} suffix="min" hint="Tirar suporte, montar" error={errs.labor} />
+          <Field label="Embalagem" value={packaging} onChange={setPackaging} prefix="R$" error={errs.packaging} />
           <Field label="Lucro sobre o custo" value={margin} onChange={setMargin} suffix="%" error={errs.margin} />
         </div>
         <p className="text-xs text-lab-muted">
@@ -169,7 +174,12 @@ export default function Calculator({ workshop = FALLBACK_WORKSHOP, printers = FA
       </section>
 
       <section className="space-y-4 lg:sticky lg:top-6" aria-label="Resultado" aria-live="polite">
-        {!result && (
+        {!result && hasErr && (
+          <div className="rounded-3xl border border-coral/40 bg-coral/10 p-6 text-center text-sm">
+            Corrija os campos em <b>vermelho</b> pra ver o resultado.
+          </div>
+        )}
+        {!result && !hasErr && (
           <div className="rounded-3xl border border-dashed border-lab-line p-6 text-center text-lab-muted">
             Preencha o <b className="text-lab-text">peso</b> e o <b className="text-lab-text">tempo de impressão</b> pra ver quanto cobrar.
           </div>

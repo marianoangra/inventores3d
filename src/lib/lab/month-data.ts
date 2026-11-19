@@ -24,6 +24,7 @@ export async function getMonth(m?: string | null): Promise<{ key: string; label:
     unitCost: Number(r.unit_cost),
     printMinutes: Number(r.print_minutes),
     channel: r.channel as Channel,
+    unitFee: r.unit_fee === null || r.unit_fee === undefined ? null : Number(r.unit_fee),
     soldOn: r.sold_on,
   }));
   const expenses: ExpenseItem[] = (e.data ?? []).map((r) => ({ id: r.id, description: r.description, category: r.category, amount: Number(r.amount), spentOn: r.spent_on }));

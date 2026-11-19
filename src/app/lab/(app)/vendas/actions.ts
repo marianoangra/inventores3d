@@ -4,16 +4,19 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { buildExpense, buildSale } from "@/lib/lab/entries";
 import { getPart } from "@/lib/lab/parts-data";
+import { getWorkshop } from "@/lib/lab/data";
+import { resolveFees } from "@/lib/lab/fees";
 import type { FormState } from "@/components/lab/ActionForm";
 
 const s = (f: FormData, k: string) => String(f.get(k) ?? "");
 
 export async function addSale(_: FormState, f: FormData): Promise<FormState> {
   const partId = s(f, "partId") || null;
-  const part = partId ? await getPart(partId) : null;
+  const [part, { settings }] = await Promise.all([partId ? getPart(partId) : null, getWorkshop()]);
   const row = buildSale(
     { partId, description: s(f, "description"), qty: s(f, "qty"), unitPrice: s(f, "unitPrice"), unitCost: s(f, "unitCost"), channel: s(f, "channel"), soldOn: s(f, "soldOn") },
     part ? { id: part.id, name: part.name, unitCost: part.unitCost, printMinutes: part.printMinutes } : null,
+    resolveFees(settings.feeOverrides),
   );
   if ("error" in row) return { error: row.error };
   const supabase = await createClient();

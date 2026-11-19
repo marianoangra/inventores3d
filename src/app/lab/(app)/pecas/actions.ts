@@ -23,6 +23,8 @@ const clean = (d: PartDraft): PartDraft => ({
 
 export async function savePart(input: PartDraft): Promise<{ error?: string; id?: string }> {
   const d = clean(input);
+  const nums = [d.grams, d.printMinutes, d.laborMinutes, d.packaging, d.marginPct];
+  if (nums.some((n) => !Number.isFinite(n) || n < 0)) return { error: "Use só números positivos." };
   const { settings, printers, filaments } = await getWorkshop();
   const built = buildPart(d, settings, printers.find((p) => p.id === d.printerId) ?? null, filaments.find((f) => f.id === d.filamentId) ?? null);
   if ("error" in built) return { error: built.error };

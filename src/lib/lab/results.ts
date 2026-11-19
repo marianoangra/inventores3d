@@ -1,6 +1,7 @@
 import { CHANNELS, type Channel, type FeeRule } from "./fees";
 
-export type SaleRow = { description: string; qty: number; unitPrice: number; unitCost: number; printMinutes: number; channel: Channel; partId: string | null };
+/** unitFee: taxa congelada na venda; null/ausente = vendas antigas, calcula com a taxa atual */
+export type SaleRow = { description: string; qty: number; unitPrice: number; unitCost: number; printMinutes: number; channel: Channel; partId: string | null; unitFee?: number | null };
 export type ExpenseRow = { amount: number };
 export type MonthSummary = {
   revenue: number;
@@ -25,8 +26,9 @@ export function monthSummary(sales: SaleRow[], expenses: ExpenseRow[], fees: Rec
   for (const s of sales) {
     const rev = s.qty * s.unitPrice;
     const { pct, fixed } = (fees[s.channel] ?? fees.direto).at(s.unitPrice);
+    const uf = s.unitFee ?? pct * s.unitPrice + fixed;
     revenue += rev;
-    fee += s.qty * (pct * s.unitPrice + fixed);
+    fee += s.qty * uf;
     cogs += s.qty * s.unitCost;
     minutes += s.qty * s.printMinutes;
     byChannel[s.channel] = (byChannel[s.channel] ?? 0) + rev;
