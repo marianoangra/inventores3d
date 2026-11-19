@@ -1,3 +1,4 @@
+import { SHIPPING_BY_REGION } from "@/lib/shop/shipping";
 import type { Metadata } from "next";
 import { STORE, brl } from "@/lib/config";
 
@@ -16,6 +17,18 @@ export default function Sobre() {
         </p>
       </section>
       <section>
+        <h2 id="frete" className="font-display text-2xl font-bold text-ink scroll-mt-28">Frete</h2>
+        <p className="mt-3">Valor fixo por região, calculado pelo CEP no checkout. Acima de {brl(STORE.freeShippingFrom)}, é grátis pra todo o Brasil.</p>
+        <ul className="mt-3 grid sm:grid-cols-2 gap-x-8 gap-y-1">
+          {Object.values(SHIPPING_BY_REGION).map((r) => (
+            <li key={r.label} className="flex justify-between border-b border-line py-1.5">
+              <span>{r.label}</span>
+              <b className="text-ink tabular-nums">{brl(r.price)}</b>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section>
         <h2 id="trocas" className="font-display text-2xl font-bold text-ink scroll-mt-28">Trocas e devoluções</h2>
         <p className="mt-3">
           Pelo Código de Defesa do Consumidor, você pode desistir da compra em até 7 dias após o recebimento. Se a peça chegar quebrada ou com defeito, mande uma foto pelo WhatsApp: reimprimimos e reenviamos sem custo. Itens personalizados (com nome, foto ou tema) não podem ser devolvidos por arrependimento, só por defeito.
@@ -28,7 +41,7 @@ export default function Sobre() {
       <section>
         <h2 id="privacidade" className="font-display text-2xl font-bold text-ink scroll-mt-28">Privacidade</h2>
         <p className="mt-3">
-          Os dados que você informa no pedido (nome, WhatsApp e endereço) são usados apenas para produzir, cobrar e entregar seu pedido, conforme a LGPD. Não vendemos nem compartilhamos seus dados. A sacola fica salva só no seu navegador. Para preencher o endereço automaticamente, o CEP digitado é consultado no serviço público ViaCEP.
+          Os dados que você informa no pedido (nome, WhatsApp, endereço e, no pagamento pelo site, CPF e e-mail) são usados apenas para produzir, cobrar e entregar seu pedido, conforme a LGPD. Não vendemos seus dados. Para cobrar, nome, CPF, e-mail, telefone e CEP são enviados ao Asaas, a instituição de pagamento que processa o Pix e o cartão; os dados do cartão são digitados direto no ambiente do Asaas e nunca passam pela nossa loja. A sacola fica salva só no seu navegador. Para preencher o endereço automaticamente, o CEP digitado é consultado no serviço público ViaCEP. Para pedir a exclusão dos seus dados, fale com a gente no WhatsApp.
         </p>
       </section>
     </div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { IBox, ICalc, IChart, IDoc, IHome, IPrinter, IMenu, IMoon, IPlay, IReceipt, ISale, ISun, IUser, IWrench, IX } from "./LabIcons";
+import { IBag, IBox, ICalc, IChart, IDoc, IHome, IPrinter, IMenu, IMoon, IPlay, IReceipt, ISale, ISun, IUser, IWrench, IX } from "./LabIcons";
 
 const NAV = [
   { href: "/lab", label: "Início", Icon: IHome },
@@ -63,8 +63,10 @@ function ThemeToggle() {
 
 const isActive = (path: string, href: string) => (href === "/lab" ? path === "/lab" : path.startsWith(href));
 
-export default function LabShell({ children, user }: { children: React.ReactNode; user?: { name: string } | null }) {
+export default function LabShell({ children, user, owner = false }: { children: React.ReactNode; user?: { name: string } | null; owner?: boolean }) {
   const path = usePathname();
+  // "Pedidos da loja" só aparece pro dono da loja
+  const nav = owner ? [...NAV.slice(0, 4), { href: "/lab/pedidos", label: "Pedidos da loja", Icon: IBag }, ...NAV.slice(4)] : NAV;
   const [menu, setMenu] = useState(false);
   useEffect(() => setMenu(false), [path]);
 
@@ -74,7 +76,7 @@ export default function LabShell({ children, user }: { children: React.ReactNode
       <aside className="hidden print:!hidden lg:flex fixed inset-y-0 left-0 w-64 flex-col border-r border-lab-line bg-lab-card px-4 py-5">
         <LabLogo />
         <nav className="mt-8 flex flex-col gap-1" aria-label="Lab">
-          {NAV.map(({ href, label, Icon }) => (
+          {nav.map(({ href, label, Icon }) => (
             <Link
               key={href}
               href={href}
@@ -103,7 +105,7 @@ export default function LabShell({ children, user }: { children: React.ReactNode
 
       {/* barra inferior (celular) */}
       <nav className="lg:hidden print:hidden fixed bottom-0 inset-x-0 z-30 grid grid-cols-5 border-t border-lab-line bg-lab-card pb-[env(safe-area-inset-bottom)]" aria-label="Lab">
-        {NAV.filter((n) => MOBILE.includes(n.href)).map(({ href, label, Icon }) => (
+        {nav.filter((n) => MOBILE.includes(n.href)).map(({ href, label, Icon }) => (
           <Link key={href} href={href} className={`flex flex-col items-center justify-center gap-1 h-16 text-[11px] font-medium ${isActive(path, href) ? "text-brand" : "text-lab-muted"}`}>
             <Icon size={21} />
             {label === "Calculadora" ? "Calcular" : label}
@@ -125,7 +127,7 @@ export default function LabShell({ children, user }: { children: React.ReactNode
               </button>
             </div>
             <div className="grid grid-cols-3 gap-2">
-              {NAV.map(({ href, label, Icon }) => (
+              {nav.map(({ href, label, Icon }) => (
                 <Link key={href} href={href} className={`flex flex-col items-center gap-1.5 rounded-2xl py-4 text-[12.5px] font-medium ${isActive(path, href) ? "bg-brand text-white" : "bg-lab-soft text-lab-text"}`}>
                   <Icon size={22} />
                   {label}

@@ -70,9 +70,17 @@ try {
   const qUpd = await B.c.from("quotes").update({ discount: 99 }).eq("id", qA.data?.id).select("id");
   check(!qUpd.error && qUpd.data.length === 0, "B não altera orçamento de A");
 
+  // pedidos da loja (CPF/endereço): ninguém logado lê nem escreve, só o servidor
+  const so = await A.c.from("store_orders").select("id").limit(1);
+  check(!!so.error || so.data.length === 0, "usuário logado não lê pedidos da loja");
+  const soIns = await A.c.from("store_orders").insert({ code: "I3D-TESTE", env: "sandbox", items: [], subtotal: 0, total: 0, pay_method: "pix", customer_name: "x", cpf: "x", email: "x", whatsapp: "x", cep: "x", street: "x", number: "x", city: "x", uf: "SP" });
+  check(!!soIns.error, "usuário logado não cria pedido da loja");
+
   const anon = createClient(URL, ANON, { auth: { persistSession: false } });
   const an = await anon.from("expenses").select("id");
   check(!!an.error || an.data.length === 0, "anônimo não lê nada");
+  const anSo = await anon.from("store_orders").select("id").limit(1);
+  check(!!anSo.error || anSo.data.length === 0, "anônimo não lê pedidos da loja");
 } catch (e) {
   fails.push(String(e.message || e));
   console.log("  ERRO", e.message || e);

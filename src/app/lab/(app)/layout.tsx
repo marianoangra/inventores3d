@@ -1,7 +1,13 @@
 import LabShell from "@/components/lab/LabShell";
-import { requireOnboarded } from "@/lib/lab/data";
+import { getUser, requireOnboarded } from "@/lib/lab/data";
+import { isStoreOwner } from "@/lib/shop/owner";
 
 export default async function LabAppLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const profile = await requireOnboarded();
-  return <LabShell user={{ name: profile.name }}>{children}</LabShell>;
+  const user = await getUser();
+  return (
+    <LabShell user={{ name: profile.name }} owner={isStoreOwner(user?.email)}>
+      {children}
+    </LabShell>
+  );
 }
