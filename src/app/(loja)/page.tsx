@@ -24,6 +24,8 @@ const CAT_ART: Record<string, { art: Art; color: string; bg: string; photo?: str
   chaveiros: { art: "keychain", color: "rosa", bg: "#fdebf3" },
   kits: { art: "party", color: "arcoiris", bg: "#fff4d6" },
   personalizados: { art: "name", color: "lava", bg: "#ffece6" },
+  natal: { art: "party", color: "vermelho", bg: "#fdecee", photo: "/produtos/l2-kit-6-cortadores-natal-1.webp" },
+  confeitaria: { art: "party", color: "ouro", bg: "#fff4d6", photo: "/produtos/l2-kit-4-cortadores-basicos-1.webp" },
   setup: { art: "box", color: "grafite", bg: "#eef0f3", photo: "/produtos/suporte-headset-1.webp" },
 };
 
