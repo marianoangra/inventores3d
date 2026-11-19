@@ -66,7 +66,7 @@ const isActive = (path: string, href: string) => (href === "/lab" ? path === "/l
 export default function LabShell({ children, user, owner = false }: { children: React.ReactNode; user?: { name: string } | null; owner?: boolean }) {
   const path = usePathname();
   // "Pedidos da loja" só aparece pro dono da loja
-  const nav = owner ? [...NAV.slice(0, 4), { href: "/lab/pedidos", label: "Pedidos da loja", Icon: IBag }, ...NAV.slice(4)] : NAV;
+  const nav = owner ? [...NAV.slice(0, 4), { href: "/lab/pedidos", label: "Pedidos da loja", Icon: IBag }, { href: "/lab/mercado-livre", label: "Mercado Livre", Icon: IBag }, ...NAV.slice(4)] : NAV;
   const [menu, setMenu] = useState(false);
   useEffect(() => setMenu(false), [path]);
 

@@ -75,6 +75,8 @@ try {
   check(!!so.error || so.data.length === 0, "usuário logado não lê pedidos da loja");
   const soIns = await A.c.from("store_orders").insert({ code: "I3D-TESTE", env: "sandbox", items: [], subtotal: 0, total: 0, pay_method: "pix", customer_name: "x", cpf: "x", email: "x", whatsapp: "x", cep: "x", street: "x", number: "x", city: "x", uf: "SP" });
   check(!!soIns.error, "usuário logado não cria pedido da loja");
+  const mo = await A.c.from("ml_orders").select("ml_order_id").limit(1);
+  check(!!mo.error || mo.data.length === 0, "usuário logado não lê pedidos do ML");
 
   const anon = createClient(URL, ANON, { auth: { persistSession: false } });
   const an = await anon.from("expenses").select("id");

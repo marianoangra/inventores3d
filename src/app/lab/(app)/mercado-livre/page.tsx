@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { connectionStatus, isMlAdmin, mlConfigured } from "@/lib/ml/client";
+import { recentMlOrders } from "@/lib/ml/order-sync";
+import ActionForm from "@/components/lab/ActionForm";
+import { STORE } from "@/lib/config";
+import { importMlOrders } from "./actions";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Mercado Livre — Lab" };
@@ -15,6 +19,7 @@ export default async function MercadoLivrePage({ searchParams }: { searchParams:
   const { ok, erro } = await searchParams;
   const configured = mlConfigured();
   const status = configured ? await connectionStatus() : null;
+  const recent = status ? await recentMlOrders() : [];
 
   return (
     <div className="max-w-xl space-y-6">
@@ -43,6 +48,32 @@ export default async function MercadoLivrePage({ searchParams }: { searchParams:
           {status ? "Reconectar conta" : "Conectar conta do Mercado Livre"}
         </a>
       )}
+
+      <section className="rounded-3xl border border-lab-line bg-lab-card p-5 sm:p-6 space-y-3">
+        <h2 className="font-display text-lg font-extrabold">Vendas → fila de produção</h2>
+        <p className="text-sm text-lab-muted">
+          Cada venda paga no ML entra sozinha em Vendas (canal Mercado Livre, com a tarifa) e na fila da Produção. Venda cancelada sai da fila se ainda não começou.
+          A peça é achada pelo nome: deixe o nome em Minhas peças igual ao produto do site ou ao título do anúncio.
+        </p>
+        <p className="text-sm">
+          No devcenter do ML, em <b>URL de notificações</b>, use <code>{STORE.url}/api/ml/notificacoes</code> e marque o tópico <b>Orders</b>.
+        </p>
+        {status && (
+          <ActionForm action={importMlOrders} submit="Buscar vendas pagas (últimos 14 dias)" variant="ghost" />
+        )}
+        {recent.length > 0 && (
+          <ul className="divide-y divide-lab-line text-sm">
+            {recent.map((r) => (
+              <li key={String(r.ml_order_id)} className="flex justify-between gap-3 py-2">
+                <span>
+                  #{String(r.ml_order_id)} {r.buyer ? `· ${r.buyer}` : ""}
+                </span>
+                <span className="text-lab-muted">{r.cancelled_at ? "cancelada" : r.processed_at ? "na fila" : r.status}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </div>
   );
 }

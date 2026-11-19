@@ -9,9 +9,9 @@ const ML_AUTH = "https://auth.mercadolivre.com.br/authorization";
 
 export const mlConfigured = () => Boolean(process.env.ML_CLIENT_ID && process.env.ML_CLIENT_SECRET);
 
-/** Só o dono da loja mexe na integração (e-mail em ML_ADMIN_EMAIL, separados por vírgula). */
+/** Só o dono da loja mexe na integração (e-mail em STORE_OWNER_EMAIL ou ML_ADMIN_EMAIL, separados por vírgula). */
 export function isMlAdmin(email?: string | null) {
-  const list = (process.env.ML_ADMIN_EMAIL ?? "")
+  const list = (process.env.STORE_OWNER_EMAIL || process.env.ML_ADMIN_EMAIL || "")
     .split(",")
     .map((s) => s.trim().toLowerCase())
     .filter(Boolean);
@@ -49,7 +49,7 @@ async function tokenRequest(params: Record<string, string>): Promise<TokenRespon
   return body;
 }
 
-async function saveTokens(t: TokenResponse, nickname?: string) {
+async function saveTokens(t: TokenResponse, nickname?: string, ownerUserId?: string) {
   const db = createAdminClient();
   const row: Record<string, unknown> = {
     id: 1,
@@ -60,12 +60,13 @@ async function saveTokens(t: TokenResponse, nickname?: string) {
     updated_at: new Date().toISOString(),
   };
   if (nickname !== undefined) row.nickname = nickname;
+  if (ownerUserId) row.owner_user_id = ownerUserId; // vendas do ML caem na conta de quem conectou
   const { error } = await db.from("ml_tokens").upsert(row);
   if (error) throw new Error(`salvar token ML: ${error.message}`);
 }
 
 /** Troca o code do callback por tokens e guarda. Devolve o apelido da conta conectada. */
-export async function exchangeCode(code: string, origin: string, codeVerifier: string) {
+export async function exchangeCode(code: string, origin: string, codeVerifier: string, ownerUserId?: string) {
   const t = await tokenRequest({
     grant_type: "authorization_code",
     code,
@@ -73,7 +74,7 @@ export async function exchangeCode(code: string, origin: string, codeVerifier: s
     code_verifier: codeVerifier,
   });
   const me = await fetch(`${ML_API}/users/me`, { headers: { authorization: `Bearer ${t.access_token}` } }).then((r) => r.json());
-  await saveTokens(t, me.nickname ?? null);
+  await saveTokens(t, me.nickname ?? null, ownerUserId);
   return me.nickname as string | undefined;
 }
 

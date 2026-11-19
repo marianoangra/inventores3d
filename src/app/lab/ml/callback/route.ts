@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
     to.searchParams.set("erro", "Autorização inválida ou expirada. Tente conectar de novo.");
   } else {
     try {
-      await exchangeCode(code, request.nextUrl.origin, verifier);
+      await exchangeCode(code, request.nextUrl.origin, verifier, user?.id);
       to.searchParams.set("ok", "1");
     } catch (e) {
       console.error("[ml callback]", e);
