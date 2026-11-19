@@ -3,20 +3,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { IBox, ICalc, IChart, IHome, IMenu, IMoon, IPlay, IReceipt, ISale, ISun, IUser, IWrench, IX } from "./LabIcons";
+import { IBox, ICalc, IChart, IDoc, IHome, IPrinter, IMenu, IMoon, IPlay, IReceipt, ISale, ISun, IUser, IWrench, IX } from "./LabIcons";
 
 const NAV = [
   { href: "/lab", label: "Início", Icon: IHome },
   { href: "/lab/calculadora", label: "Calculadora", Icon: ICalc },
   { href: "/lab/pecas", label: "Minhas peças", Icon: IBox },
   { href: "/lab/vendas", label: "Vendas", Icon: ISale },
+  { href: "/lab/producao", label: "Produção", Icon: IPrinter },
+  { href: "/lab/documentos", label: "Documentos", Icon: IDoc },
   { href: "/lab/despesas", label: "Despesas", Icon: IReceipt },
   { href: "/lab/resultados", label: "Resultados", Icon: IChart },
   { href: "/lab/oficina", label: "Minha oficina", Icon: IWrench },
   { href: "/lab/aprenda", label: "Aprenda", Icon: IPlay },
   { href: "/lab/conta", label: "Conta", Icon: IUser },
 ];
-const MOBILE = ["/lab", "/lab/calculadora", "/lab/vendas", "/lab/resultados"];
+const MOBILE = ["/lab", "/lab/calculadora", "/lab/vendas", "/lab/producao"];
 
 export function LabLogo() {
   return (
@@ -67,9 +69,9 @@ export default function LabShell({ children, user }: { children: React.ReactNode
   useEffect(() => setMenu(false), [path]);
 
   return (
-    <div className="min-h-dvh bg-lab-bg text-lab-text">
+    <div className="min-h-dvh bg-lab-bg text-lab-text print:bg-white">
       {/* lateral (desktop) */}
-      <aside className="hidden lg:flex fixed inset-y-0 left-0 w-64 flex-col border-r border-lab-line bg-lab-card px-4 py-5">
+      <aside className="hidden print:!hidden lg:flex fixed inset-y-0 left-0 w-64 flex-col border-r border-lab-line bg-lab-card px-4 py-5">
         <LabLogo />
         <nav className="mt-8 flex flex-col gap-1" aria-label="Lab">
           {NAV.map(({ href, label, Icon }) => (
@@ -90,17 +92,17 @@ export default function LabShell({ children, user }: { children: React.ReactNode
       </aside>
 
       {/* topo (celular) */}
-      <header className="lg:hidden sticky top-0 z-30 flex items-center justify-between h-16 px-4 bg-lab-bg/90 backdrop-blur border-b border-lab-line">
+      <header className="lg:hidden print:hidden sticky top-0 z-30 flex items-center justify-between h-16 px-4 bg-lab-bg/90 backdrop-blur border-b border-lab-line">
         <LabLogo />
         <ThemeToggle />
       </header>
 
-      <main className="lg:pl-64 pb-24 lg:pb-10">
+      <main className="lg:pl-64 pb-24 lg:pb-10 print:p-0">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 py-6 lg:py-10">{children}</div>
       </main>
 
       {/* barra inferior (celular) */}
-      <nav className="lg:hidden fixed bottom-0 inset-x-0 z-30 grid grid-cols-5 border-t border-lab-line bg-lab-card pb-[env(safe-area-inset-bottom)]" aria-label="Lab">
+      <nav className="lg:hidden print:hidden fixed bottom-0 inset-x-0 z-30 grid grid-cols-5 border-t border-lab-line bg-lab-card pb-[env(safe-area-inset-bottom)]" aria-label="Lab">
         {NAV.filter((n) => MOBILE.includes(n.href)).map(({ href, label, Icon }) => (
           <Link key={href} href={href} className={`flex flex-col items-center justify-center gap-1 h-16 text-[11px] font-medium ${isActive(path, href) ? "text-brand" : "text-lab-muted"}`}>
             <Icon size={21} />

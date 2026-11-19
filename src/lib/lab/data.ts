@@ -24,6 +24,7 @@ export const toFilament = (r: Row): Filament => ({
   color: (r.color as string | null) ?? null,
   spoolPrice: num(r.spool_price),
   spoolGrams: num(r.spool_grams),
+  gramsLeft: r.grams_left === null || r.grams_left === undefined ? null : num(r.grams_left),
 });
 export const toWorkshop = (r: Row): WorkshopSettings => ({
   kwhPrice: num(r.kwh_price),
@@ -32,6 +33,8 @@ export const toWorkshop = (r: Row): WorkshopSettings => ({
   packaging: num(r.packaging),
   marginPct: num(r.margin_pct),
   feeOverrides: (r.fee_overrides as FeeOverride) ?? {},
+  printHoursPerDay: r.print_hours_per_day === undefined ? 16 : num(r.print_hours_per_day),
+  businessName: (r.business_name as string | null) ?? null,
 });
 
 /** Usuário logado (uma chamada por request). */

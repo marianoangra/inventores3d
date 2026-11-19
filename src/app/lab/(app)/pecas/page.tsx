@@ -61,6 +61,9 @@ export default async function PecasPage() {
               </table>
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <Link href={`/lab/pecas/${p.id}`} className="h-9 inline-flex items-center rounded-full px-3 text-sm font-medium text-brand hover:bg-lab-soft">Editar</Link>
+                {p.stlUrl && (
+                  <a href={p.stlUrl} target="_blank" rel="noopener noreferrer" className="h-9 inline-flex items-center rounded-full px-3 text-sm font-medium text-lab-muted hover:bg-lab-soft hover:text-lab-text">Arquivo do modelo ↗</a>
+                )}
                 <ActionForm action={duplicatePart} submit="Duplicar" variant="ghost">
                   <input type="hidden" name="id" value={p.id} />
                 </ActionForm>

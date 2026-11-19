@@ -27,3 +27,6 @@ export const ITrash = svg(<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V
 export const ICopy = svg(<><rect x="8" y="8" width="13" height="13" rx="2" /><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" /></>);
 export const IEdit = svg(<path d="M4 20h4L19 9l-4-4L4 16v4ZM14 6l4 4" />);
 export const IWhats = svg(<path d="M3.5 20.5 5 16a8.5 8.5 0 1 1 3 3l-4.5 1.5ZM9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 .8a5 5 0 0 1-2.3-2.3l.8-1-1-2Z" />);
+export const IPrinter = svg(<><path d="M6 9V3h12v6" /><rect x="3" y="9" width="18" height="8" rx="2" /><path d="M7 14h10v7H7z" /></>);
+export const IDoc = svg(<><path d="M6 2.5h8l4 4v15H6Z" /><path d="M14 2.5v4h4M9 12h6M9 16h6" /></>);
+export const ILink = svg(<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />);

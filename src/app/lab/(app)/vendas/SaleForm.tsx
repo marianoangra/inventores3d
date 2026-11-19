@@ -86,6 +86,12 @@ export default function SaleForm({ parts, today }: { parts: PartOpt[]; today: st
           <label htmlFor="s-date" className={lbl}>Data</label>
           <input id="s-date" name="soldOn" type="date" defaultValue={today} className={field} />
         </div>
+        {partId && (
+          <label className="sm:col-span-2 flex items-center gap-2 text-sm">
+            <input type="checkbox" name="toQueue" defaultChecked className="h-4 w-4 accent-[var(--color-brand)]" />
+            Colocar na fila de produção (desmarque se já tem em estoque)
+          </label>
+        )}
       </div>
       <div className="flex flex-wrap items-center gap-3">
         <button disabled={pending} className="h-11 rounded-full bg-brand px-6 text-sm font-semibold text-white hover:bg-brand-dark disabled:opacity-60">

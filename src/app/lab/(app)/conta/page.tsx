@@ -36,6 +36,14 @@ export default async function ContaPage() {
         </ActionForm>
       </section>
       <section className={card}>
+        <h2 className="font-display text-lg font-extrabold">Meus dados</h2>
+        <p className="mt-1 text-sm text-lab-muted">Baixe tudo que você lançou no Lab quando quiser. Os dados são seus.</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a href="/lab/conta/exportar" className="h-11 inline-flex items-center rounded-full border border-lab-line px-5 text-sm font-semibold hover:border-brand">Baixar tudo (JSON)</a>
+          <a href="/lab/conta/exportar?formato=csv" className="h-11 inline-flex items-center rounded-full border border-lab-line px-5 text-sm font-semibold hover:border-brand">Vendas pra planilha (CSV)</a>
+        </div>
+      </section>
+      <section className={card}>
         <form action="/lab/sair" method="post">
           <button className="h-11 rounded-full border border-lab-line px-5 text-sm font-semibold hover:border-brand">Sair do Lab</button>
         </form>

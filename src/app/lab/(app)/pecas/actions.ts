@@ -66,3 +66,13 @@ export async function deletePart(_: FormState, f: FormData): Promise<FormState> 
   revalidatePath("/lab", "layout");
   redirect("/lab/pecas");
 }
+
+export async function saveStl(_: FormState, f: FormData): Promise<FormState> {
+  const url = String(f.get("url") ?? "").trim().slice(0, 500);
+  if (url && !/^https?:\/\/\S+$/i.test(url)) return { error: "Cole o link completo (começando com https://)." };
+  const supabase = await createClient();
+  const { error } = await supabase.from("parts").update({ stl_url: url || null }).eq("id", String(f.get("id")));
+  if (error) return { error: "Não deu pra salvar o link." };
+  revalidatePath("/lab", "layout");
+  return { ok: url ? "Link salvo!" : "Link removido." };
+}

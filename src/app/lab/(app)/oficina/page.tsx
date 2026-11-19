@@ -30,6 +30,8 @@ export default async function OficinaPage() {
             <Input label="Perdas e falhas" name="loss" suffix="%" defaultValue={settings.lossPct} hint="Impressões que dão errado. 5–10%" />
             <Input label="Embalagem padrão" name="packaging" prefix="R$" defaultValue={settings.packaging} />
             <Input label="Lucro padrão" name="margin" suffix="%" defaultValue={settings.marginPct} hint="Sobre o custo. Iniciante: 80–150%" />
+            <Input label="Impressora roda por dia" name="hoursDay" suffix="h" defaultValue={settings.printHoursPerDay ?? 16} hint="Usado na previsão da Produção" />
+            <Input label="Nome da loja" name="businessName" type="text" defaultValue={settings.businessName ?? ""} hint="Sai no orçamento e no recibo" />
           </div>
         </ActionForm>
       </section>
@@ -79,6 +81,7 @@ export default async function OficinaPage() {
                   <Input label="Cor" name="color" type="text" defaultValue={f.color} />
                   <Input label="Preço do rolo" name="price" prefix="R$" defaultValue={f.spoolPrice} />
                   <Input label="Peso do rolo" name="grams" suffix="g" defaultValue={f.spoolGrams} />
+                  <Input label="Estoque (sobra)" name="left" suffix="g" defaultValue={f.gramsLeft ?? ""} hint={f.gramsLeft === null || f.gramsLeft === undefined ? "Vazio = não controla" : f.gramsLeft < 200 ? "⚠ Acabando — compre mais" : "Desconta sozinho na Produção"} />
                 </div>
               </ActionForm>
               <ActionForm action={deleteFilament} submit="Excluir" variant="danger" className="mt-1">
@@ -94,6 +97,7 @@ export default async function OficinaPage() {
                 <Input label="Cor" name="color" type="text" />
                 <Input label="Preço do rolo" name="price" prefix="R$" />
                 <Input label="Peso do rolo" name="grams" suffix="g" defaultValue={1000} />
+                <Input label="Estoque (sobra)" name="left" suffix="g" defaultValue={1000} hint="Vazio = não controla" />
               </div>
             </ActionForm>
           </details>

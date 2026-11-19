@@ -55,6 +55,21 @@ try {
   const partForge = await B.c.from("parts").insert({ name: "x", grams: 1, print_minutes: 1, margin_pct: 1, unit_cost: 1, prices: {}, printer_id: pr.data?.id });
   check(!!partForge.error, "B não usa impressora de A numa peça");
 
+  const sale = await A.c.from("sales").insert({ description: "venda A", qty: 1, unit_price: 10, channel: "direto" }).select("id").single();
+  const jobA = await A.c.from("production_jobs").insert({ sale_id: sale.data?.id, description: "ordem A", qty: 1 }).select("id").single();
+  check(!jobA.error && jobA.data?.id, "A cria ordem de produção da própria venda");
+  const jobsB = await B.c.from("production_jobs").select("id");
+  check(!jobsB.error && jobsB.data.length === 0, "B não enxerga ordens de A");
+  const jobForge = await B.c.from("production_jobs").insert({ sale_id: sale.data?.id, description: "x", qty: 1 });
+  check(!!jobForge.error, "B não cria ordem ligada à venda de A");
+
+  const qA = await A.c.from("quotes").insert({ number: 1, kind: "orcamento", customer_name: "Cliente", items: [] }).select("id").single();
+  check(!qA.error && qA.data?.id, "A cria orçamento");
+  const qB = await B.c.from("quotes").select("id");
+  check(!qB.error && qB.data.length === 0, "B não enxerga orçamentos de A");
+  const qUpd = await B.c.from("quotes").update({ discount: 99 }).eq("id", qA.data?.id).select("id");
+  check(!qUpd.error && qUpd.data.length === 0, "B não altera orçamento de A");
+
   const anon = createClient(URL, ANON, { auth: { persistSession: false } });
   const an = await anon.from("expenses").select("id");
   check(!!an.error || an.data.length === 0, "anônimo não lê nada");

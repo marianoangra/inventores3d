@@ -8,6 +8,7 @@ export type PartItem = PartDraft & {
   unitCost: number;
   prices: Record<Channel, number | null>;
   pph: Record<Channel, number | null>;
+  stlUrl: string | null;
 };
 
 type Row = Record<string, unknown> & { prices?: Record<string, unknown> };
@@ -30,6 +31,7 @@ export const toPart = (r: Row): PartItem => {
     unitCost: Number(r.unit_cost),
     prices: { direto: price("direto"), shopee: price("shopee"), ml: price("ml") },
     pph: { direto: pph.direto ?? null, shopee: pph.shopee ?? null, ml: pph.ml ?? null },
+    stlUrl: (r.stl_url as string | null) ?? null,
   };
 };
 

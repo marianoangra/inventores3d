@@ -13,10 +13,13 @@ export async function saveSettings(_: FormState, f: FormData): Promise<FormState
   const v = { kwh_price: n(f, "kwh"), labor_hourly: n(f, "labor"), loss_pct: n(f, "loss"), packaging: n(f, "packaging"), margin_pct: n(f, "margin") };
   if (Object.values(v).some((x) => x === null || x < 0)) return { error: "Preencha todos os campos com números (ex.: 0,95)." };
   if (v.loss_pct! > 100) return { error: "Perdas vão de 0 a 100%." };
+  const hoursDay = String(f.get("hoursDay") ?? "").trim() ? n(f, "hoursDay") : 16;
+  if (hoursDay === null || hoursDay <= 0 || hoursDay > 24) return { error: "Horas por dia: de 1 a 24." };
+  const business_name = String(f.get("businessName") ?? "").trim().slice(0, 60) || null;
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   if (!data.user) return { error: "Sessão expirou. Entre de novo." };
-  const { error } = await supabase.from("workshop_settings").upsert({ user_id: data.user.id, ...v, reviewed_at: new Date().toISOString() }, { onConflict: "user_id" });
+  const { error } = await supabase.from("workshop_settings").upsert({ user_id: data.user.id, ...v, print_hours_per_day: hoursDay, business_name, reviewed_at: new Date().toISOString() }, { onConflict: "user_id" });
   return error ? { error: "Não deu pra salvar." } : done("Salvo!");
 }
 
@@ -43,8 +46,10 @@ export async function saveFilament(_: FormState, f: FormData): Promise<FormState
   const id = String(f.get("id") ?? "") || null;
   const type = String(f.get("type") ?? "").trim().slice(0, 30);
   const color = String(f.get("color") ?? "").trim().slice(0, 30) || null;
-  const v = { spool_price: n(f, "price"), spool_grams: n(f, "grams") };
+  const leftRaw = String(f.get("left") ?? "").trim();
+  const v = { spool_price: n(f, "price"), spool_grams: n(f, "grams"), grams_left: leftRaw ? parseNum(leftRaw) : null };
   if (!type) return { error: "Qual o tipo? (PLA, PETG…)" };
+  if (leftRaw && (v.grams_left === null || v.grams_left < 0)) return { error: "Estoque: gramas que sobram (ou deixe vazio)." };
   if (v.spool_price === null || v.spool_price < 0 || !v.spool_grams || v.spool_grams <= 0) return { error: "Confira o preço e o peso do rolo (maior que zero)." };
   const supabase = await createClient();
   const { error } = id ? await supabase.from("filaments").update({ type, color, ...v }).eq("id", id) : await supabase.from("filaments").insert({ type, color, ...v });
