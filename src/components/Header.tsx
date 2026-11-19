@@ -14,6 +14,7 @@ const NAV = [
   { href: "/produtos?c=chaveiros", label: "Chaveiros", c: "chaveiros" },
   { href: "/produtos?c=kits", label: "Festas & Kits", c: "kits" },
   { href: "/produtos?c=personalizados", label: "Personalizados", c: "personalizados" },
+  { href: "/produtos?c=setup", label: "Setup & Casa", c: "setup" },
 ];
 
 export function Logo() {

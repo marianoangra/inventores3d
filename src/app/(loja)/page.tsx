@@ -24,6 +24,7 @@ const CAT_ART: Record<string, { art: Art; color: string; bg: string; photo?: str
   chaveiros: { art: "keychain", color: "rosa", bg: "#fdebf3" },
   kits: { art: "party", color: "arcoiris", bg: "#fff4d6" },
   personalizados: { art: "name", color: "lava", bg: "#ffece6" },
+  setup: { art: "box", color: "grafite", bg: "#eef0f3", photo: "/produtos/suporte-headset-1.webp" },
 };
 
 export default function Home() {

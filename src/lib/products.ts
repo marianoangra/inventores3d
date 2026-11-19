@@ -16,7 +16,7 @@ export type Art =
   | "lamp"
   | "party";
 
-export type Category = "invencoes" | "articulados" | "fidget" | "chaveiros" | "kits" | "personalizados";
+export type Category = "invencoes" | "articulados" | "fidget" | "chaveiros" | "kits" | "personalizados" | "setup";
 
 export const CATEGORIES: { id: Category; label: string; desc: string }[] = [
   { id: "invencoes", label: "Invenções", desc: "Criações nossas que você não acha em loja" },
@@ -25,6 +25,7 @@ export const CATEGORIES: { id: Category; label: string; desc: string }[] = [
   { id: "chaveiros", label: "Chaveiros", desc: "Mini articulados pra levar junto" },
   { id: "kits", label: "Kits & Festas", desc: "Lembrancinhas e caixas surpresa" },
   { id: "personalizados", label: "Personalizados", desc: "Com nome, foto ou do seu jeito" },
+  { id: "setup", label: "Setup & Casa", desc: "Suportes e organizadores pra mesa" },
 ];
 
 export type Color = { id: string; label: string; a: string; b: string; extra?: number };
@@ -42,6 +43,10 @@ export const COLORS: Record<string, Color> = {
   candy: { id: "candy", label: "Candy (multicolor)", a: "#14b8a6", b: "#fb7185" },
   espacial: { id: "espacial", label: "Preto e branco", a: "#111827", b: "#e5e7eb" },
   palco: { id: "palco", label: "Pintado à mão", a: "#1f2937", b: "#f3e5ce" },
+  grafite: { id: "grafite", label: "Grafite", a: "#26262e", b: "#4b4b57" },
+  roxo: { id: "roxo", label: "Roxo", a: "#6d4aff", b: "#a08bff" },
+  menta: { id: "menta", label: "Menta", a: "#5fd3b0", b: "#a7f0d9" },
+  branco: { id: "branco", label: "Branco", a: "#e5e7eb", b: "#ffffff" },
 };
 
 export type Product = {
@@ -307,11 +312,78 @@ export const PRODUCTS: Product[] = [
     category: "personalizados",
     art: "name",
     price: 19.9,
-    short: "Seu nome em 3D, em duas cores.",
-    description: "Chaveiro com nome (até 12 letras) em relevo bicolor. Ótimo pra mochila, lancheira e lembrancinha.",
-    specs: ["Até 12 letras", "Bicolor", "Argola metálica"],
-    colors: ["galaxy", "rosa", "oceano", "lava", "floresta"],
+    short: "Seu nome em 3D, em relevo e duas cores.",
+    description:
+      "Plaquinha arredondada com o nome em relevo numa segunda cor, e argola metálica. Ótimo pra mochila, lancheira e lembrancinha. As fotos são do projeto 3D.",
+    specs: ["Até 12 letras", "Bicolor (placa + letras)", "Argola metálica", "Cerca de 7 × 2,2 cm"],
+    colors: ["roxo", "grafite", "lava", "rosa", "oceano", "floresta"],
     personalize: "Nome (até 12 letras)",
+  },
+  {
+    slug: "topo-de-bolo-personalizado",
+    name: "Topo de Bolo Personalizado 3D",
+    category: "personalizados",
+    art: "party",
+    price: 34.9,
+    short: "Nome e idade em 3D, rígido e reutilizável. Vira lembrança da festa.",
+    description:
+      "Topo de bolo com o nome em letra cursiva e a idade em destaque, numa peça só, com duas hastes pra espetar. Não é papel: é rígido e fica de lembrança depois da festa. Mandamos uma prévia antes de produzir. As fotos são do projeto 3D.",
+    specs: ["Cerca de 15 cm de largura", "Nome + idade", "Hastes pra espetar no bolo", "Prévia antes de produzir", "Use sobre a cobertura (evite contato prolongado com o recheio)"],
+    colors: ["ouro", "branco", "rosa", "roxo"],
+    personalize: "Nome e idade (ex.: Theo 5)",
+    badge: "Novo",
+  },
+  {
+    slug: "suporte-headset",
+    name: "Suporte de Mesa para Headset",
+    category: "setup",
+    art: "box",
+    price: 54.9,
+    short: "Organiza o setup e protege o arco do fone. Base larga que não tomba.",
+    description:
+      "Suporte de mesa para headset gamer e fones over-ear. Apoio arredondado que não marca o arco do fone, travas nas pontas e base pesada com pés antiderrapantes. As fotos são do projeto 3D.",
+    specs: ["Cerca de 26 cm de altura", "Base 11 × 11 cm", "Apoio arredondado com travas", "Pés antiderrapantes"],
+    colors: ["grafite", "branco", "roxo"],
+    badge: "Novo",
+  },
+  {
+    slug: "suporte-2-controles",
+    name: "Suporte para 2 Controles",
+    category: "setup",
+    art: "box",
+    price: 49.9,
+    short: "Dois controles em pé, organizados e à mão.",
+    description:
+      "Torre de mesa com dois apoios com batente, pra deixar os controles do videogame em pé e organizados. Compatível com controles no formato do PS5 (DualSense). Controles não inclusos. As fotos são do projeto 3D.",
+    specs: ["Comporta 2 controles", "Cerca de 26 cm de altura", "Apoios com batente", "Controles não inclusos"],
+    colors: ["grafite", "branco"],
+    badge: "Novo",
+  },
+  {
+    slug: "suporte-echo-dot",
+    name: "Suporte de Mesa para Echo Dot",
+    category: "setup",
+    art: "box",
+    price: 34.9,
+    short: "Inclina a caixinha pra você: som e microfone na sua direção.",
+    description:
+      "Suporte inclinado para Echo Dot de 4ª e 5ª geração, com frente aberta pra luz aparecer e saída de cabo atrás. Echo Dot não incluso. As fotos são do projeto 3D.",
+    specs: ["Compatível com Echo Dot 4ª e 5ª geração", "Inclinação de 18°", "Saída de cabo traseira", "Echo Dot não incluso"],
+    colors: ["menta", "grafite", "branco"],
+    badge: "Novo",
+  },
+  {
+    slug: "organizador-de-mesa",
+    name: "Organizador de Mesa",
+    category: "setup",
+    art: "box",
+    price: 59.9,
+    short: "Canetas, celular, cartões e miudezas numa peça só.",
+    description:
+      "Organizador em degraus: dois nichos pra canetas, encaixe pra cartões, apoio pro celular em pé e bandeja pra clips e pen drives. As fotos são do projeto 3D.",
+    specs: ["Cerca de 18 × 10 × 10 cm", "2 nichos pra canetas", "Apoio pra celular", "Bandeja pra miudezas"],
+    colors: ["roxo", "grafite", "branco", "menta"],
+    badge: "Novo",
   },
   {
     slug: "luminaria-litofania",

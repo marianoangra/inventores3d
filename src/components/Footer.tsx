@@ -46,6 +46,7 @@ export default function Footer() {
           <Link href="/produtos?c=articulados" className="block hover:text-white">Articulados</Link>
           <Link href="/produtos?c=kits" className="block hover:text-white">Lembrancinhas de festa</Link>
           <Link href="/produtos?c=personalizados" className="block hover:text-white">Personalizados</Link>
+          <Link href="/produtos?c=setup" className="block hover:text-white">Setup &amp; Casa</Link>
         </div>
         <div className="text-sm space-y-2.5">
           <p className="font-semibold text-white mb-3">Ajuda</p>
