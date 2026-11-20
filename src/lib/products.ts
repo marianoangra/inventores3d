@@ -972,6 +972,67 @@ export const PRODUCTS: Product[] = [
     specs: ["7 x 3,1 x 1 cm fechado","Aba trava em ~70°","Com argola de metal"],
     colors: ["vermelho","floresta","amarelo"],
   },
+  // ── lote 6 (20/11/2026): 5 utilidades (abridor, bandeja, clips, vassoura, saboneteira) — fotos são render do projeto 3D
+  {
+    slug: "abridor-lancador-tampinha",
+    name: "Abridor Lançador de Tampinha",
+    category: "setup",
+    art: "box",
+    price: 21.9,
+    short: "Abre a cerveja e a tampinha sai voando. Diversão garantida no churrasco.",
+    description:
+      "Abridor de garrafa que, em vez de deixar a tampinha cair, lança ela pra cima. Encaixe na tampa, puxe pra cima com um golpe rápido e a tampinha sai voando. Vira brincadeira no churrasco, no bar de casa e na festa.",
+    specs: ["10,8 x 3,8 cm","Tampinha metálica padrão","Furo pra chaveiro"],
+    colors: ["vermelho","floresta","amarelo"],
+  },
+  {
+    slug: "bandeja-organizadora-mesa",
+    name: "Bandeja Organizadora de Mesa",
+    category: "setup",
+    art: "box",
+    price: 31.9,
+    short: "3 divisões pra chaves, moedas, fone e relógio. Fim da bagunça na entrada de casa.",
+    description:
+      "Bandeja minimalista pra deixar na entrada de casa, na mesa de cabeceira ou no escritório: um espaço grande pra chaves, carteira e fone, e duas divisões menores pra moedas, anéis, pen drive e clipes.",
+    specs: ["14 x 9 x 2,4 cm","3 divisões","Entrada, cabeceira ou escritório"],
+    colors: ["floresta","vermelho","amarelo"],
+  },
+  {
+    slug: "kit-10-prendedores-saco",
+    name: "Kit 10 Prendedores de Saco",
+    category: "setup",
+    art: "box",
+    price: 26.9,
+    short: "10 clips com trava pra fechar pacote de café, arroz, biscoito e salgadinho.",
+    description:
+      "Clips pra fechar pacote aberto de café, arroz, feijão, biscoito, salgadinho e ração. Dobre a boca do pacote, aperte o clip e prenda o gancho da ponta: a trava segura firme e os dentinhos não deixam o saco escorregar.",
+    specs: ["10 clips de 9,9 cm","Trava de gancho","Cores sortidas"],
+    colors: ["vermelho","floresta","amarelo"],
+  },
+  {
+    slug: "kit-2-suporte-vassoura",
+    name: "Kit 2 Suportes de Vassoura",
+    category: "setup",
+    art: "box",
+    price: 21.9,
+    short: "Garra de pressão pra cabo de vassoura, rodo e mop. Área de serviço organizada.",
+    description:
+      "Garras de pressão pra pendurar vassoura, rodo, mop e pá na parede da área de serviço ou da garagem. É só empurrar o cabo pra dentro da garra: ela abre e segura firme.",
+    specs: ["2 suportes","Cabos de 2 a 2,6 cm","Parafuso ou fita dupla face"],
+    colors: ["amarelo","vermelho","floresta"],
+  },
+  {
+    slug: "saboneteira-com-dreno",
+    name: "Saboneteira com Dreno",
+    category: "setup",
+    art: "box",
+    price: 21.9,
+    short: "Sabonete apoiado em barrinhas, água escorre pelos rasgos. Sabonete dura mais.",
+    description:
+      "O sabonete fica apoiado em barrinhas elevadas e a água escorre pelos rasgos do fundo, sem empoçar. Sabonete seco dura mais e a pia fica limpa. Combina com o nosso porta-escova de dente.",
+    specs: ["11,2 x 7,8 cm","Barrinhas + dreno","Pia ou box"],
+    colors: ["floresta","amarelo","vermelho"],
+  },
 ];
 
 export const getProduct = (slug: string) => PRODUCTS.find((p) => p.slug === slug);

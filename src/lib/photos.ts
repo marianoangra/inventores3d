@@ -55,6 +55,11 @@ export const PHOTOS: Record<string, string[]> = {
   "kit-2-vasos-espiral": ["/produtos/l4-kit-2-vasos-espiral-1.webp","/produtos/l4-kit-2-vasos-espiral-2.webp","/produtos/l4-kit-2-vasos-espiral-3.webp"],
   "suporte-porta-escova": ["/produtos/l4-suporte-porta-escova-1.webp","/produtos/l4-suporte-porta-escova-2.webp","/produtos/l4-suporte-porta-escova-3.webp"],
   "chaveiro-suporte-celular": ["/produtos/l5-chaveiro-suporte-celular-1.webp","/produtos/l5-chaveiro-suporte-celular-2.webp","/produtos/l5-chaveiro-suporte-celular-3.webp","/produtos/l5-chaveiro-suporte-celular-4.webp","/produtos/l5-chaveiro-suporte-celular-5.webp"],
+  "abridor-lancador-tampinha": ["/produtos/l6-abridor-lancador-tampinha-1.webp","/produtos/l6-abridor-lancador-tampinha-2.webp","/produtos/l6-abridor-lancador-tampinha-3.webp"],
+  "bandeja-organizadora-mesa": ["/produtos/l6-bandeja-organizadora-mesa-1.webp","/produtos/l6-bandeja-organizadora-mesa-2.webp","/produtos/l6-bandeja-organizadora-mesa-3.webp"],
+  "kit-10-prendedores-saco": ["/produtos/l6-kit-10-prendedores-saco-1.webp","/produtos/l6-kit-10-prendedores-saco-2.webp","/produtos/l6-kit-10-prendedores-saco-3.webp"],
+  "kit-2-suporte-vassoura": ["/produtos/l6-kit-2-suporte-vassoura-1.webp","/produtos/l6-kit-2-suporte-vassoura-2.webp","/produtos/l6-kit-2-suporte-vassoura-3.webp"],
+  "saboneteira-com-dreno": ["/produtos/l6-saboneteira-com-dreno-1.webp","/produtos/l6-saboneteira-com-dreno-2.webp","/produtos/l6-saboneteira-com-dreno-3.webp"],
 };
 
 export const photosOf = (slug: string) => PHOTOS[slug] ?? [];
