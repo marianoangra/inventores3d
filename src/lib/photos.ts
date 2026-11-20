@@ -42,6 +42,16 @@ export const PHOTOS: Record<string, string[]> = {
   "suporte-tablet": ["/produtos/l2-suporte-tablet-1.webp", "/produtos/l2-suporte-tablet-2.webp", "/produtos/l2-suporte-tablet-3.webp", "/produtos/l2-suporte-tablet-4.webp"],
   "topo-bolo-feliz-natal": ["/produtos/l2-topo-bolo-feliz-natal-1.webp", "/produtos/l2-topo-bolo-feliz-natal-2.webp"],
   "vaso-geometrico": ["/produtos/l2-vaso-geometrico-1.webp", "/produtos/l2-vaso-geometrico-2.webp", "/produtos/l2-vaso-geometrico-3.webp"],
+  "kit-2-piao-de-mesa": ["/produtos/l3-kit-2-piao-de-mesa-1.webp","/produtos/l3-kit-2-piao-de-mesa-2.webp","/produtos/l3-kit-2-piao-de-mesa-3.webp"],
+  "fidget-engrenagem": ["/produtos/l3-fidget-engrenagem-1.webp","/produtos/l3-fidget-engrenagem-2.webp"],
+  "porca-parafuso-fidget": ["/produtos/l3-porca-parafuso-fidget-1.webp","/produtos/l3-porca-parafuso-fidget-2.webp","/produtos/l3-porca-parafuso-fidget-3.webp"],
+  "fidget-slider-click": ["/produtos/l3-fidget-slider-click-1.webp","/produtos/l3-fidget-slider-click-2.webp"],
+  "anel-spinner": ["/produtos/l3-anel-spinner-1.webp","/produtos/l3-anel-spinner-2.webp"],
+  "lagarta-articulada": ["/produtos/l3-lagarta-articulada-1.webp","/produtos/l3-lagarta-articulada-2.webp","/produtos/l3-lagarta-articulada-3.webp"],
+  "polvo-articulado": ["/produtos/l3-polvo-articulado-1.webp","/produtos/l3-polvo-articulado-2.webp","/produtos/l3-polvo-articulado-3.webp"],
+  "cubo-quebra-cabeca-7-pecas": ["/produtos/l3-cubo-quebra-cabeca-7-pecas-1.webp","/produtos/l3-cubo-quebra-cabeca-7-pecas-2.webp","/produtos/l3-cubo-quebra-cabeca-7-pecas-3.webp"],
+  "tangram-com-estojo": ["/produtos/l3-tangram-com-estojo-1.webp","/produtos/l3-tangram-com-estojo-2.webp","/produtos/l3-tangram-com-estojo-3.webp"],
+  "jogo-da-velha-de-bolso": ["/produtos/l3-jogo-da-velha-de-bolso-1.webp","/produtos/l3-jogo-da-velha-de-bolso-2.webp","/produtos/l3-jogo-da-velha-de-bolso-3.webp"],
 };
 
 export const photosOf = (slug: string) => PHOTOS[slug] ?? [];
