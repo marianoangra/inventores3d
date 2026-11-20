@@ -46,6 +46,7 @@ export const COLORS: Record<string, Color> = {
   espacial: { id: "espacial", label: "Preto e branco", a: "#111827", b: "#e5e7eb" },
   palco: { id: "palco", label: "Pintado à mão", a: "#1f2937", b: "#f3e5ce" },
   vermelho: { id: "vermelho", label: "Vermelho", a: "#d62839", b: "#ff6b6b" },
+  amarelo: { id: "amarelo", label: "Amarelo", a: "#e0a800", b: "#ffd84d" },
   grafite: { id: "grafite", label: "Grafite", a: "#26262e", b: "#4b4b57" },
   roxo: { id: "roxo", label: "Roxo", a: "#6d4aff", b: "#a08bff" },
   menta: { id: "menta", label: "Menta", a: "#5fd3b0", b: "#a7f0d9" },
@@ -932,6 +933,31 @@ export const PRODUCTS: Product[] = [
     specs: ["6 cm com tampa","5 X + 5 O","+14 anos"],
     colors: ["grafite","menta"],
     age: "+14 anos",
+  },
+  // ── lote 4 (20/11/2026): itens fáceis que vendem +1000 no ML — fotos são render do projeto 3D
+  {
+    slug: "kit-2-vasos-espiral",
+    name: "Kit 2 Vasos Espiral",
+    category: "setup",
+    art: "box",
+    price: 21.9,
+    short: "Dois vasinhos torcidos (9 e 6 cm) pra suculenta artificial, mesa e prateleira.",
+    description:
+      "Dois vasinhos com ondas torcidas em sentidos opostos, um alto e um baixo. Ficam bonitos com suculentas e plantas artificiais, flores secas, ou como cachepô pra vaso plástico pequeno. Também servem de porta-pincel e porta-caneta.",
+    specs: ["Alto 9 cm + baixo 6,2 cm","Diâmetro 7,5 cm","Uso decorativo / cachepô"],
+    colors: ["floresta","amarelo","vermelho"],
+  },
+  {
+    slug: "suporte-porta-escova",
+    name: "Porta-Escova de Dente",
+    category: "setup",
+    art: "box",
+    price: 21.9,
+    short: "3 escovas + creme dental + nicho pro fio dental. Furinhos de dreno no fundo.",
+    description:
+      "Organiza a pia do banheiro: 3 furos pra escovas, 1 espaço pro creme dental e um nicho raso pro fio dental ou raspador de língua. Cada furo tem dreno no fundo e a peça fica apoiada em 4 pezinhos, pra água escorrer e não acumular.",
+    specs: ["3 escovas + creme dental","Dreno no fundo + pés elevados","8,4 x 4 x 6,4 cm"],
+    colors: ["floresta","amarelo","vermelho"],
   },
 ];
 

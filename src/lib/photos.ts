@@ -52,6 +52,8 @@ export const PHOTOS: Record<string, string[]> = {
   "cubo-quebra-cabeca-7-pecas": ["/produtos/l3-cubo-quebra-cabeca-7-pecas-1.webp","/produtos/l3-cubo-quebra-cabeca-7-pecas-2.webp","/produtos/l3-cubo-quebra-cabeca-7-pecas-3.webp"],
   "tangram-com-estojo": ["/produtos/l3-tangram-com-estojo-1.webp","/produtos/l3-tangram-com-estojo-2.webp","/produtos/l3-tangram-com-estojo-3.webp"],
   "jogo-da-velha-de-bolso": ["/produtos/l3-jogo-da-velha-de-bolso-1.webp","/produtos/l3-jogo-da-velha-de-bolso-2.webp","/produtos/l3-jogo-da-velha-de-bolso-3.webp"],
+  "kit-2-vasos-espiral": ["/produtos/l4-kit-2-vasos-espiral-1.webp","/produtos/l4-kit-2-vasos-espiral-2.webp","/produtos/l4-kit-2-vasos-espiral-3.webp"],
+  "suporte-porta-escova": ["/produtos/l4-suporte-porta-escova-1.webp","/produtos/l4-suporte-porta-escova-2.webp","/produtos/l4-suporte-porta-escova-3.webp"],
 };
 
 export const photosOf = (slug: string) => PHOTOS[slug] ?? [];
