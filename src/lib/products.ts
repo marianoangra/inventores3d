@@ -959,6 +959,19 @@ export const PRODUCTS: Product[] = [
     specs: ["3 escovas + creme dental","Dreno no fundo + pés elevados","8,4 x 4 x 6,4 cm"],
     colors: ["floresta","amarelo","vermelho"],
   },
+  // ── lote 5 (20/11/2026): chaveiro suporte de celular — fotos são render do projeto 3D
+  {
+    slug: "chaveiro-suporte-celular",
+    name: "Chaveiro Suporte de Celular",
+    category: "setup",
+    art: "box",
+    price: 21.9,
+    short: "Fechado é chaveiro. Abre a aba e vira apoio pro celular na mesa.",
+    description:
+      "Fechado, é um chaveiro fino que vai no molho de chaves, no bolso ou na mochila. Abriu a aba, vira apoio pro celular na mesa: pra ver vídeo, fazer chamada ou acompanhar receita. A aba trava sozinha na inclinação certa (cerca de 70°).",
+    specs: ["7 x 3,1 x 1 cm fechado","Aba trava em ~70°","Com argola de metal"],
+    colors: ["vermelho","floresta","amarelo"],
+  },
 ];
 
 export const getProduct = (slug: string) => PRODUCTS.find((p) => p.slug === slug);

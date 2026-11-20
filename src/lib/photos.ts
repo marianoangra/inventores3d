@@ -54,6 +54,7 @@ export const PHOTOS: Record<string, string[]> = {
   "jogo-da-velha-de-bolso": ["/produtos/l3-jogo-da-velha-de-bolso-1.webp","/produtos/l3-jogo-da-velha-de-bolso-2.webp","/produtos/l3-jogo-da-velha-de-bolso-3.webp"],
   "kit-2-vasos-espiral": ["/produtos/l4-kit-2-vasos-espiral-1.webp","/produtos/l4-kit-2-vasos-espiral-2.webp","/produtos/l4-kit-2-vasos-espiral-3.webp"],
   "suporte-porta-escova": ["/produtos/l4-suporte-porta-escova-1.webp","/produtos/l4-suporte-porta-escova-2.webp","/produtos/l4-suporte-porta-escova-3.webp"],
+  "chaveiro-suporte-celular": ["/produtos/l5-chaveiro-suporte-celular-1.webp","/produtos/l5-chaveiro-suporte-celular-2.webp","/produtos/l5-chaveiro-suporte-celular-3.webp","/produtos/l5-chaveiro-suporte-celular-4.webp","/produtos/l5-chaveiro-suporte-celular-5.webp"],
 };
 
 export const photosOf = (slug: string) => PHOTOS[slug] ?? [];
